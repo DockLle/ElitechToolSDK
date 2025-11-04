@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		C60C9BA02E80E34D00EB0BF4 /* OutPutFramework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = C60C9BA12E80E34D00EB0BF4 /* Build configuration list for PBXAggregateTarget "OutPutFramework" */;
+			buildPhases = (
+				C60C9BA42E80E36700EB0BF4 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OutPutFramework;
+			packageProductDependencies = (
+			);
+			productName = OutPutFramework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXFileReference section */
+		C60C9B702E7EA09400EB0BF4 /* ElitechTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ElitechTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C60C9B772E7EA09400EB0BF4 /* Exceptions for "ElitechTool" folder in "ElitechTool" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			publicHeaders = (
+				ElitechManager.h,
+				ElitechTool.h,
+				ElitechToolDevice.h,
+				ETBleScanData.h,
+				ETVgwRtObj.h,
+			);
+			target = C60C9B6F2E7EA09400EB0BF4 /* ElitechTool */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C60C9B722E7EA09400EB0BF4 /* ElitechTool */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C60C9B772E7EA09400EB0BF4 /* Exceptions for "ElitechTool" folder in "ElitechTool" target */,
+			);
+			path = ElitechTool;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C60C9B6D2E7EA09400EB0BF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C60C9B662E7EA09400EB0BF4 = {
+			isa = PBXGroup;
+			children = (
+				C60C9B722E7EA09400EB0BF4 /* ElitechTool */,
+				C60C9B712E7EA09400EB0BF4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C60C9B712E7EA09400EB0BF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C60C9B702E7EA09400EB0BF4 /* ElitechTool.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C60C9B6B2E7EA09400EB0BF4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C60C9B6F2E7EA09400EB0BF4 /* ElitechTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C60C9B782E7EA09400EB0BF4 /* Build configuration list for PBXNativeTarget "ElitechTool" */;
+			buildPhases = (
+				C60C9B6B2E7EA09400EB0BF4 /* Headers */,
+				C60C9B6C2E7EA09400EB0BF4 /* Sources */,
+				C60C9B6D2E7EA09400EB0BF4 /* Frameworks */,
+				C60C9B6E2E7EA09400EB0BF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C60C9B722E7EA09400EB0BF4 /* ElitechTool */,
+			);
+			name = ElitechTool;
+			packageProductDependencies = (
+			);
+			productName = ElitechTool;
+			productReference = C60C9B702E7EA09400EB0BF4 /* ElitechTool.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C60C9B672E7EA09400EB0BF4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1610;
+				TargetAttributes = {
+					C60C9B6F2E7EA09400EB0BF4 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+					C60C9BA02E80E34D00EB0BF4 = {
+						CreatedOnToolsVersion = 16.1;
+					};
+				};
+			};
+			buildConfigurationList = C60C9B6A2E7EA09400EB0BF4 /* Build configuration list for PBXProject "ElitechTool" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C60C9B662E7EA09400EB0BF4;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C60C9B712E7EA09400EB0BF4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C60C9B6F2E7EA09400EB0BF4 /* ElitechTool */,
+				C60C9BA02E80E34D00EB0BF4 /* OutPutFramework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C60C9B6E2E7EA09400EB0BF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C60C9BA42E80E36700EB0BF4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/ElitechTool",
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\n# 配置参数\nSDK_NAME=\"ElitechTool\"\nCONFIGURATION=\"Release\"\nSCHEME_NAME=\"ElitechTool\"\nPROJECT_NAME=\"ElitechTool.xcodeproj\"\n\n# 输出目录设置\nBUILD_DIR=\"build\"\nOUTPUT_DIR=\"Distribution/${SDK_NAME}\"\nFRAMEWORK_DIR=\"${OUTPUT_DIR}/Frameworks\"\nDOCS_DIR=\"${OUTPUT_DIR}/Documentation\"\n\n# 清理并创建目录\nrm -rf \"${OUTPUT_DIR}\"\nmkdir -p \"${FRAMEWORK_DIR}\"\nmkdir -p \"${DOCS_DIR}\"\n\n# 构建iOS设备架构\nxcodebuild \\\n    -UseModernBuildSystem=NO \\\n    -project \"${PROJECT_NAME}\" \\\n    -scheme \"${SCHEME_NAME}\" \\\n    -configuration \"${CONFIGURATION}\" \\\n    -sdk iphoneos \\\n    BUILD_DIR=\"${BUILD_DIR}\" \\\n    clean build\n\n# 构建iOS模拟器架构\nxcodebuild \\\n    -UseModernBuildSystem=NO \\\n    -project \"${PROJECT_NAME}\" \\\n    -scheme \"${SCHEME_NAME}\" \\\n    -configuration \"${CONFIGURATION}\" \\\n    -sdk iphonesimulator \\\n    BUILD_DIR=\"${BUILD_DIR}\" \\\n    clean build\n\n# 查找生成的framework\nDEVICE_FRAMEWORK=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${SDK_NAME}.framework\"\nSIMULATOR_FRAMEWORK=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${SDK_NAME}.framework\"\nUNIVERSAL_FRAMEWORK=\"${FRAMEWORK_DIR}/${SDK_NAME}.framework\"\n\n# 创建通用framework目录结构\nmkdir -p \"${UNIVERSAL_FRAMEWORK}\"\n\n# 拷贝设备framework的文件到通用目录\ncp -R \"${DEVICE_FRAMEWORK}/\" \"${UNIVERSAL_FRAMEWORK}/\"\n\n# 合并二进制文件\nlipo -create \\\n    \"${DEVICE_FRAMEWORK}/${SDK_NAME}\" \\\n    \"${SIMULATOR_FRAMEWORK}/${SDK_NAME}\" \\\n    -output \"${UNIVERSAL_FRAMEWORK}/${SDK_NAME}\"\n\n# 拷贝Swift模块（如果有）\nif [ -d \"${SIMULATOR_FRAMEWORK}/Modules/${SDK_NAME}.swiftmodule\" ]; then\n    cp -R \"${SIMULATOR_FRAMEWORK}/Modules/${SDK_NAME}.swiftmodule/\" \"${UNIVERSAL_FRAMEWORK}/Modules/${SDK_NAME}.swiftmodule/\"\nfi\n\n# 生成文档（可选）\n#jazzy \\\n    --module ${SDK_NAME} \\\n    --output \"${DOCS_DIR}\" \\\n    --theme apple\n\n# 复制LICENSE和README文件\ncp \"LICENSE\" \"${OUTPUT_DIR}/\"\ncp \"README.md\" \"${OUTPUT_DIR}/\"\n\n# 创建版本信息文件\necho \"SDK Version: 1.0.1\" > \"${OUTPUT_DIR}/VERSION\"\necho \"Build Date: $(date)\" >> \"${OUTPUT_DIR}/VERSION\"\n\n# 打包成ZIP\ncd \"${OUTPUT_DIR}\"\nzip -r \"../${SDK_NAME}-$(date +%Y%m%d).zip\" .\n\necho \"SDK打包完成！输出文件: Distribution/${SDK_NAME}-$(date +%Y%m%d).zip\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C60C9B6C2E7EA09400EB0BF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C60C9B792E7EA09400EB0BF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0.8;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitech.ElitechTool;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C60C9B7A2E7EA09400EB0BF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0.8;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitech.ElitechTool;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C60C9B7B2E7EA09400EB0BF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C60C9B7C2E7EA09400EB0BF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C60C9BA22E80E34D00EB0BF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C60C9BA32E80E34D00EB0BF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C60C9B6A2E7EA09400EB0BF4 /* Build configuration list for PBXProject "ElitechTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C60C9B7B2E7EA09400EB0BF4 /* Debug */,
+				C60C9B7C2E7EA09400EB0BF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C60C9B782E7EA09400EB0BF4 /* Build configuration list for PBXNativeTarget "ElitechTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C60C9B792E7EA09400EB0BF4 /* Debug */,
+				C60C9B7A2E7EA09400EB0BF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C60C9BA12E80E34D00EB0BF4 /* Build configuration list for PBXAggregateTarget "OutPutFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C60C9BA22E80E34D00EB0BF4 /* Debug */,
+				C60C9BA32E80E34D00EB0BF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C60C9B672E7EA09400EB0BF4 /* Project object */;
+}
