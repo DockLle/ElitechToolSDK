@@ -12,6 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 可配合系统蓝牙框架使用，也可配合ElitechManager使用，二选一
 @interface ElitechToolDevice : NSObject
 
 
@@ -19,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter peripheral: 外设对象
 - (instancetype)initWithPeripheral:(CBPeripheral *)peripheral;
 
+/// 检查是否为真空计设备（备注：若不使用用ElitechManager去管理蓝牙框架，自行使用系统蓝牙框架，可使用此方法鉴别目标设备）
+/// - Parameter advertisementData: 设备广播数据
++ (BOOL)checkVgwMini:(NSDictionary *)advertisementData;
 
 /// 接收处理数据，当蓝牙框架接收到来自真空计设备的原始数据时，需调用此方法进行数据处理。
 /// - Parameters:
@@ -53,12 +57,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// 开始抽真空
+/// - Description 调用此方法会清空目前设备中记录的数据并重新开启记录
 - (void)startVacuumingWithResult:(void(^)(BOOL res))result;
 
 /// 结束抽真空
 - (void)endVacuumingWithResult:(void(^)(BOOL res))result;
 
 /// 读取数据记录
+/// - Description 读取设备中所有数据
 - (void)readRecordWithResult:(void(^)(float progress,NSError *_Nullable err,NSArray<NSDictionary<NSString*,NSString*> *> *records))result;
 
 

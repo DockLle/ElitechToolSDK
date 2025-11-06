@@ -20,3 +20,4 @@ FOUNDATION_EXPORT const unsigned char ElitechToolVersionString[];
 #import <ElitechTool/ETVgwRtObj.h>
 #import <ElitechTool/ElitechManager.h>
 #import <ElitechTool/ETBleScanData.h>
+#import <ElitechTool/DeviceTypeDefine.h>

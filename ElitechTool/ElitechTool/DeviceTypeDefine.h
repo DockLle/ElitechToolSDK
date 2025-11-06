@@ -8,14 +8,16 @@
 #ifndef DeviceTypeDefine_h
 #define DeviceTypeDefine_h
 
-
-static NSString * ETDeviceCodeVgwmini = @"0003";
-static NSString * ETDeviceTypeNameVgwmini = @"VGW-mini";
+//以下信息主要供自行使用系统蓝牙框架而不使用ElitechManager类的时候去发现设备
 
 
+//真空计类型码及类型名
+FOUNDATION_EXTERN NSString * const ETDeviceCodeVgwmini;
+FOUNDATION_EXTERN NSString * const ETDeviceTypeNameVgwmini;
 
-static NSString* vgwMini_serviceUUID = @"FCFD";
-static NSString* vgwMini_recvCharacteristicsUUID = @"FCFD";
-static NSString* vgwMini_sendCharacteristicsUUID = @"FCFE";
+//真空计 服务id 特征id
+FOUNDATION_EXTERN NSString * const vgwMini_serviceUUID;
+FOUNDATION_EXTERN NSString * const vgwMini_recvCharacteristicsUUID;
+FOUNDATION_EXTERN NSString * const vgwMini_sendCharacteristicsUUID;
 
 #endif /* DeviceTypeDefine_h */

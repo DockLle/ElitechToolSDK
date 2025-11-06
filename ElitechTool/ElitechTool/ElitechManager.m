@@ -8,7 +8,16 @@
 #import "ElitechManager.h"
 #import "NSData+Util.h"
 #import "ETNewProtocolWorker.h"
-#import "DeviceTypeDefine.h"
+//#import "DeviceTypeDefine.h"
+
+
+NSString * const ETDeviceCodeVgwmini = @"0003";
+NSString * const ETDeviceTypeNameVgwmini = @"VGW-mini";
+
+
+NSString* vgwMini_serviceUUID = @"FCFD";
+NSString* vgwMini_recvCharacteristicsUUID = @"FCFD";
+NSString* vgwMini_sendCharacteristicsUUID = @"FCFE";
 
 
 @interface ElitechManager()<CBCentralManagerDelegate,CBPeripheralDelegate>
@@ -228,7 +237,7 @@
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:vgwMini_recvCharacteristicsUUID]])
     {
-        NSLog(@"接收---》%@",characteristic.value);
+//        NSLog(@"接收---》%@",characteristic.value);
         for (id<ElitechManagerDelegate> obj in self.delegates) {
             if([obj respondsToSelector:@selector(elitechManager:didReceiveData:from:)]) {
                 [obj elitechManager:self didReceiveData:characteristic.value from:peripheral];

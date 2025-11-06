@@ -16,6 +16,8 @@
 
 @import CoreBluetooth;
 
+static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
+
 @interface ElitechToolDevice()<NSURLSessionDownloadDelegate>
 
 @property (nonatomic,strong) ETNewProtocolWorker *worker;
@@ -77,6 +79,21 @@
 
 #pragma mark - open
 
++ (BOOL)checkVgwMini:(NSDictionary *)advertisementData
+{
+    NSData *manufacturerData = advertisementData[CBAdvertisementDataManufacturerDataKey];
+    if (manufacturerData == nil || manufacturerData.length <2) {
+        return false;
+    }
+    
+    NSData *deviceMode = [manufacturerData subdataWithRange:NSMakeRange(0, 2)];
+    UInt16 type = [NSData dataToUnsignedShort:deviceMode];
+    if (type == 0x0007) {
+        return YES;
+    }
+    
+    return NO;
+}
 
 - (void)setClockWithResult:(void(^)(BOOL res))result
 {
@@ -268,9 +285,19 @@
                 {
                     UInt8 result = [NSData dataToUnsignedChar:[stData subdataWithRange:NSMakeRange(1, 1)]];
                     
-                    if (self.updateCallBack) {
-                        self.updateCallBack(YES, 100, nil);
+                    if (result == 1) {
+                        if (self.updateCallBack) {
+                            self.updateCallBack(YES, 100, nil);
+                        }
                     }
+                    else
+                    {
+                        NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:2002 userInfo:@{NSLocalizedDescriptionKey:@"软件升级失败"}];
+                        if (self.updateCallBack) {
+                            self.updateCallBack(YES, 100, err);
+                        }
+                    }
+                    
                 }
                     break;
                     
@@ -508,7 +535,7 @@
 - (void)reqSoftversion:(NSString *)deviceTypeCode andSoftversion:(NSString *)softversion
 {
     
-    NSString *urlStr = [NSString stringWithFormat:@"http://test.icoldcloud.com:10023/api/device/DeviceSoftwareVersion/deviceType?deviceTypeCode=%@",deviceTypeCode];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/api/device/DeviceSoftwareVersion/deviceType?deviceTypeCode=%@",hostPort,deviceTypeCode];
     // 创建 NSURL 对象
     NSURL *url = [NSURL URLWithString:urlStr];
 
@@ -527,7 +554,7 @@
             NSError *jsonError;
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
             if (!jsonError) {
-                NSLog(@"响应数据: %@", jsonDict);
+//                NSLog(@"响应数据: %@", jsonDict);
                 
                 NSDictionary *item = jsonDict[@"data"];
                 if ([item notEmpty])
@@ -585,7 +612,7 @@
         ver = softversion;
     }
     
-    NSString *url = [NSString stringWithFormat:@"http://test.icoldcloud.com:10023/api/device/DeviceSoftwareVersion/getSoftwareFileByTypeCode?deviceTypeCode=%@&version=%@",deviceTypeCode,ver];
+    NSString *url = [NSString stringWithFormat:@"%@/api/device/DeviceSoftwareVersion/getSoftwareFileByTypeCode?deviceTypeCode=%@&version=%@",hostPort,deviceTypeCode,ver];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
