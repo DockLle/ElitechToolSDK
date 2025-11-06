@@ -6,11 +6,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ElitechTool/ETBleScanData.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class ETBleScanData;
 
 @protocol ElitechManagerDelegate;
 

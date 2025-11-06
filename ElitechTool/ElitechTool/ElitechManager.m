@@ -8,6 +8,7 @@
 #import "ElitechManager.h"
 #import "NSData+Util.h"
 #import "ETNewProtocolWorker.h"
+#import "ETBleScanData.h"
 //#import "DeviceTypeDefine.h"
 
 
