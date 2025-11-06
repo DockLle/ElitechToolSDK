@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "ElitechToolSDK"
-  spec.version      = "0.8.5"
+  spec.version      = "0.8.6"
   spec.summary      = "帮助开发者快速接入elitech真空计"
 
   # This description is used to generate tags and improve search results.
