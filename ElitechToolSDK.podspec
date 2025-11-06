@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "ElitechToolSDK"
   spec.version      = "0.8.6"
-  spec.summary      = "帮助开发者快速接入elitech真空计"
+  spec.summary      = "elitech真空计"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -95,7 +95,7 @@ Pod::Spec.new do |spec|
   spec.source_files  = "ElitechTool/ElitechTool/*.{h,m}"
   # spec.exclude_files = "Classes/Exclude"
 
-  spec.public_header_files = "ElitechTool/ElitechTool/publicHeader/*.h"
+  spec.public_header_files = "ElitechTool/ElitechTool/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
