@@ -133,10 +133,8 @@ Pod::Spec.new do |spec|
 
   spec.requires_arc = true
 
-  spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/ElitechTool/ElitechTool/" }
+  # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/ElitechTool/ElitechTool/" }
   # spec.dependency "JSONKit", "~> 1.4"
   
-  spec.pod_target_xcconfig = {
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 armv7'
-  }
+  # spec.pod_target_xcconfig = {'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64 arm64e armv7 armv7s i386'}
 end
