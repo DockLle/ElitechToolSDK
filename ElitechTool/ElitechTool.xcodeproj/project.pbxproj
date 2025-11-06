@@ -30,12 +30,12 @@
 		C60C9B772E7EA09400EB0BF4 /* Exceptions for "ElitechTool" folder in "ElitechTool" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			publicHeaders = (
-				DeviceTypeDefine.h,
-				ElitechManager.h,
-				ElitechTool.h,
-				ElitechToolDevice.h,
-				ETBleScanData.h,
-				ETVgwRtObj.h,
+				publicHeader/DeviceTypeDefine.h,
+				publicHeader/ElitechManager.h,
+				publicHeader/ElitechTool.h,
+				publicHeader/ElitechToolDevice.h,
+				publicHeader/ETBleScanData.h,
+				publicHeader/ETVgwRtObj.h,
 			);
 			target = C60C9B6F2E7EA09400EB0BF4 /* ElitechTool */;
 		};
