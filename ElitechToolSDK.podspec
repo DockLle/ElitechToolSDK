@@ -25,6 +25,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
+                      帮助开发者快速接入elitech真空计
                    DESC
 
   spec.homepage     = "https://github.com/DockLle/ElitechToolSDK"
