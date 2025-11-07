@@ -15,8 +15,8 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "ElitechTool"
-  spec.version      = "0.9.3"
+  spec.name         = "ElitechToolSDK"
+  spec.version      = "0.9.4"
   spec.summary      = "elitech真空计"
 
   # This description is used to generate tags and improve search results.
@@ -92,10 +92,10 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "ElitechTool/ElitechTool/*.{h,m}"
+  spec.source_files  = "ElitechToolSDK/ElitechToolSDK/*.{h,m}"
   # spec.exclude_files = "Classes/Exclude"
 
-  spec.public_header_files = "ElitechTool/ElitechTool/DeviceTypeDefine.h","ElitechTool/ElitechTool/ElitechManager.h","ElitechTool/ElitechTool/ElitechTool.h","ElitechTool/ElitechTool/ElitechToolDevice.h","ElitechTool/ElitechTool/ETBleScanData.h","ElitechTool/ElitechTool/ETVgwRtObj.h"
+  spec.public_header_files = "ElitechToolSDK/ElitechToolSDK/DeviceTypeDefine.h","ElitechToolSDK/ElitechToolSDK/ElitechManager.h","ElitechToolSDK/ElitechToolSDK/ElitechToolSDK.h","ElitechToolSDK/ElitechToolSDK/ElitechToolDevice.h","ElitechToolSDK/ElitechToolSDK/ETBleScanData.h","ElitechToolSDK/ElitechToolSDK/ETVgwRtObj.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -112,7 +112,7 @@ Pod::Spec.new do |spec|
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
   
   s.resource_bundles = {
-    'ElitechPrivacyInfo' => ['ElitechTool/Assets/PrivacyInfo.xcprivacy']
+    'ElitechPrivacyInfo' => ['ElitechToolSDK/Assets/PrivacyInfo.xcprivacy']
   }
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

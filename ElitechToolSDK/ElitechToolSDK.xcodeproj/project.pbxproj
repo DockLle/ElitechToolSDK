@@ -6,51 +6,35 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		C60C9BA02E80E34D00EB0BF4 /* OutPutFramework */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = C60C9BA12E80E34D00EB0BF4 /* Build configuration list for PBXAggregateTarget "OutPutFramework" */;
-			buildPhases = (
-				C60C9BA42E80E36700EB0BF4 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = OutPutFramework;
-			packageProductDependencies = (
-			);
-			productName = OutPutFramework;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXFileReference section */
-		C60C9B702E7EA09400EB0BF4 /* ElitechTool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ElitechTool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6C2DAA52EBD9CC100C7FE1A /* ElitechToolSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ElitechToolSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		C60C9B772E7EA09400EB0BF4 /* Exceptions for "ElitechTool" folder in "ElitechTool" target */ = {
+		C6C2DAAA2EBD9CC100C7FE1A /* Exceptions for "ElitechToolSDK" folder in "ElitechToolSDK" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			publicHeaders = (
 				DeviceTypeDefine.h,
 				ElitechManager.h,
-				ElitechTool.h,
 				ElitechToolDevice.h,
+				ElitechToolSDK.h,
 				ETBleScanData.h,
 				ETVgwRtObj.h,
 			);
-			target = C60C9B6F2E7EA09400EB0BF4 /* ElitechTool */;
+			target = C6C2DAA42EBD9CC100C7FE1A /* ElitechToolSDK */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		C60C9B722E7EA09400EB0BF4 /* ElitechTool */ = {
+		C6C2DAA72EBD9CC100C7FE1A /* ElitechToolSDK */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				C60C9B772E7EA09400EB0BF4 /* Exceptions for "ElitechTool" folder in "ElitechTool" target */,
+				C6C2DAAA2EBD9CC100C7FE1A /* Exceptions for "ElitechToolSDK" folder in "ElitechToolSDK" target */,
 			);
-			path = ElitechTool;
+			path = ElitechToolSDK;
 			sourceTree = "<group>";
 		};
-		C6C2DA662EBD92DE00C7FE1A /* Assets */ = {
+		C6C2DADF2EBD9D9300C7FE1A /* Assets */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Assets;
 			sourceTree = "<group>";
@@ -58,7 +42,7 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C60C9B6D2E7EA09400EB0BF4 /* Frameworks */ = {
+		C6C2DAA22EBD9CC100C7FE1A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -68,19 +52,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C60C9B662E7EA09400EB0BF4 = {
+		C6C2DA9B2EBD9CC100C7FE1A = {
 			isa = PBXGroup;
 			children = (
-				C6C2DA662EBD92DE00C7FE1A /* Assets */,
-				C60C9B722E7EA09400EB0BF4 /* ElitechTool */,
-				C60C9B712E7EA09400EB0BF4 /* Products */,
+				C6C2DADF2EBD9D9300C7FE1A /* Assets */,
+				C6C2DAA72EBD9CC100C7FE1A /* ElitechToolSDK */,
+				C6C2DAA62EBD9CC100C7FE1A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C60C9B712E7EA09400EB0BF4 /* Products */ = {
+		C6C2DAA62EBD9CC100C7FE1A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C60C9B702E7EA09400EB0BF4 /* ElitechTool.framework */,
+				C6C2DAA52EBD9CC100C7FE1A /* ElitechToolSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,7 +72,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		C60C9B6B2E7EA09400EB0BF4 /* Headers */ = {
+		C6C2DAA02EBD9CC100C7FE1A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -98,69 +82,65 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		C60C9B6F2E7EA09400EB0BF4 /* ElitechTool */ = {
+		C6C2DAA42EBD9CC100C7FE1A /* ElitechToolSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C60C9B782E7EA09400EB0BF4 /* Build configuration list for PBXNativeTarget "ElitechTool" */;
+			buildConfigurationList = C6C2DAAB2EBD9CC100C7FE1A /* Build configuration list for PBXNativeTarget "ElitechToolSDK" */;
 			buildPhases = (
-				C60C9B6B2E7EA09400EB0BF4 /* Headers */,
-				C60C9B6C2E7EA09400EB0BF4 /* Sources */,
-				C60C9B6D2E7EA09400EB0BF4 /* Frameworks */,
-				C60C9B6E2E7EA09400EB0BF4 /* Resources */,
+				C6C2DAA02EBD9CC100C7FE1A /* Headers */,
+				C6C2DAA12EBD9CC100C7FE1A /* Sources */,
+				C6C2DAA22EBD9CC100C7FE1A /* Frameworks */,
+				C6C2DAA32EBD9CC100C7FE1A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				C60C9B722E7EA09400EB0BF4 /* ElitechTool */,
-				C6C2DA662EBD92DE00C7FE1A /* Assets */,
+				C6C2DAA72EBD9CC100C7FE1A /* ElitechToolSDK */,
+				C6C2DADF2EBD9D9300C7FE1A /* Assets */,
 			);
-			name = ElitechTool;
+			name = ElitechToolSDK;
 			packageProductDependencies = (
 			);
-			productName = ElitechTool;
-			productReference = C60C9B702E7EA09400EB0BF4 /* ElitechTool.framework */;
+			productName = ElitechToolSDK;
+			productReference = C6C2DAA52EBD9CC100C7FE1A /* ElitechToolSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C60C9B672E7EA09400EB0BF4 /* Project object */ = {
+		C6C2DA9C2EBD9CC100C7FE1A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
-					C60C9B6F2E7EA09400EB0BF4 = {
-						CreatedOnToolsVersion = 16.1;
-					};
-					C60C9BA02E80E34D00EB0BF4 = {
+					C6C2DAA42EBD9CC100C7FE1A = {
 						CreatedOnToolsVersion = 16.1;
 					};
 				};
 			};
-			buildConfigurationList = C60C9B6A2E7EA09400EB0BF4 /* Build configuration list for PBXProject "ElitechTool" */;
+			buildConfigurationList = C6C2DA9F2EBD9CC100C7FE1A /* Build configuration list for PBXProject "ElitechToolSDK" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = C60C9B662E7EA09400EB0BF4;
+			mainGroup = C6C2DA9B2EBD9CC100C7FE1A;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = C60C9B712E7EA09400EB0BF4 /* Products */;
+			productRefGroup = C6C2DAA62EBD9CC100C7FE1A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C60C9B6F2E7EA09400EB0BF4 /* ElitechTool */,
-				C60C9BA02E80E34D00EB0BF4 /* OutPutFramework */,
+				C6C2DAA42EBD9CC100C7FE1A /* ElitechToolSDK */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C60C9B6E2E7EA09400EB0BF4 /* Resources */ = {
+		C6C2DAA32EBD9CC100C7FE1A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -169,29 +149,8 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		C60C9BA42E80E36700EB0BF4 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"$(SRCROOT)/ElitechTool",
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\n# 配置参数\nSDK_NAME=\"ElitechTool\"\nCONFIGURATION=\"Release\"\nSCHEME_NAME=\"ElitechTool\"\nPROJECT_NAME=\"ElitechTool.xcodeproj\"\n\n# 输出目录设置\nBUILD_DIR=\"build\"\nOUTPUT_DIR=\"Distribution/${SDK_NAME}\"\nFRAMEWORK_DIR=\"${OUTPUT_DIR}/Frameworks\"\nDOCS_DIR=\"${OUTPUT_DIR}/Documentation\"\n\n# 清理并创建目录\nrm -rf \"${OUTPUT_DIR}\"\nmkdir -p \"${FRAMEWORK_DIR}\"\nmkdir -p \"${DOCS_DIR}\"\n\n# 构建iOS设备架构\nxcodebuild \\\n    -UseModernBuildSystem=NO \\\n    -project \"${PROJECT_NAME}\" \\\n    -scheme \"${SCHEME_NAME}\" \\\n    -configuration \"${CONFIGURATION}\" \\\n    -sdk iphoneos \\\n    BUILD_DIR=\"${BUILD_DIR}\" \\\n    clean build\n\n# 构建iOS模拟器架构\nxcodebuild \\\n    -UseModernBuildSystem=NO \\\n    -project \"${PROJECT_NAME}\" \\\n    -scheme \"${SCHEME_NAME}\" \\\n    -configuration \"${CONFIGURATION}\" \\\n    -sdk iphonesimulator \\\n    BUILD_DIR=\"${BUILD_DIR}\" \\\n    clean build\n\n# 查找生成的framework\nDEVICE_FRAMEWORK=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${SDK_NAME}.framework\"\nSIMULATOR_FRAMEWORK=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${SDK_NAME}.framework\"\nUNIVERSAL_FRAMEWORK=\"${FRAMEWORK_DIR}/${SDK_NAME}.framework\"\n\n# 创建通用framework目录结构\nmkdir -p \"${UNIVERSAL_FRAMEWORK}\"\n\n# 拷贝设备framework的文件到通用目录\ncp -R \"${DEVICE_FRAMEWORK}/\" \"${UNIVERSAL_FRAMEWORK}/\"\n\n# 合并二进制文件\nlipo -create \\\n    \"${DEVICE_FRAMEWORK}/${SDK_NAME}\" \\\n    \"${SIMULATOR_FRAMEWORK}/${SDK_NAME}\" \\\n    -output \"${UNIVERSAL_FRAMEWORK}/${SDK_NAME}\"\n\n# 拷贝Swift模块（如果有）\nif [ -d \"${SIMULATOR_FRAMEWORK}/Modules/${SDK_NAME}.swiftmodule\" ]; then\n    cp -R \"${SIMULATOR_FRAMEWORK}/Modules/${SDK_NAME}.swiftmodule/\" \"${UNIVERSAL_FRAMEWORK}/Modules/${SDK_NAME}.swiftmodule/\"\nfi\n\n# 生成文档（可选）\n#jazzy \\\n    --module ${SDK_NAME} \\\n    --output \"${DOCS_DIR}\" \\\n    --theme apple\n\n# 复制LICENSE和README文件\ncp \"LICENSE\" \"${OUTPUT_DIR}/\"\ncp \"README.md\" \"${OUTPUT_DIR}/\"\n\n# 创建版本信息文件\necho \"SDK Version: 1.0.1\" > \"${OUTPUT_DIR}/VERSION\"\necho \"Build Date: $(date)\" >> \"${OUTPUT_DIR}/VERSION\"\n\n# 打包成ZIP\ncd \"${OUTPUT_DIR}\"\nzip -r \"../${SDK_NAME}-$(date +%Y%m%d).zip\" .\n\necho \"SDK打包完成！输出文件: Distribution/${SDK_NAME}-$(date +%Y%m%d).zip\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		C60C9B6C2E7EA09400EB0BF4 /* Sources */ = {
+		C6C2DAA12EBD9CC100C7FE1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -201,83 +160,65 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		C60C9B792E7EA09400EB0BF4 /* Debug */ = {
+		C6C2DAAC2EBD9CC100C7FE1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.elitech.ElitechTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitech.ElitechToolSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		C60C9B7A2E7EA09400EB0BF4 /* Release */ = {
+		C6C2DAAD2EBD9CC100C7FE1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0.8;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.elitech.ElitechTool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.elitech.ElitechToolSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		C60C9B7B2E7EA09400EB0BF4 /* Debug */ = {
+		C6C2DAAE2EBD9CC100C7FE1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -315,7 +256,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -341,7 +282,7 @@
 			};
 			name = Debug;
 		};
-		C60C9B7C2E7EA09400EB0BF4 /* Release */ = {
+		C6C2DAAF2EBD9CC100C7FE1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -379,7 +320,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -399,55 +340,28 @@
 			};
 			name = Release;
 		};
-		C60C9BA22E80E34D00EB0BF4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		C60C9BA32E80E34D00EB0BF4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C60C9B6A2E7EA09400EB0BF4 /* Build configuration list for PBXProject "ElitechTool" */ = {
+		C6C2DA9F2EBD9CC100C7FE1A /* Build configuration list for PBXProject "ElitechToolSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C60C9B7B2E7EA09400EB0BF4 /* Debug */,
-				C60C9B7C2E7EA09400EB0BF4 /* Release */,
+				C6C2DAAE2EBD9CC100C7FE1A /* Debug */,
+				C6C2DAAF2EBD9CC100C7FE1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C60C9B782E7EA09400EB0BF4 /* Build configuration list for PBXNativeTarget "ElitechTool" */ = {
+		C6C2DAAB2EBD9CC100C7FE1A /* Build configuration list for PBXNativeTarget "ElitechToolSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C60C9B792E7EA09400EB0BF4 /* Debug */,
-				C60C9B7A2E7EA09400EB0BF4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C60C9BA12E80E34D00EB0BF4 /* Build configuration list for PBXAggregateTarget "OutPutFramework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C60C9BA22E80E34D00EB0BF4 /* Debug */,
-				C60C9BA32E80E34D00EB0BF4 /* Release */,
+				C6C2DAAC2EBD9CC100C7FE1A /* Debug */,
+				C6C2DAAD2EBD9CC100C7FE1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C60C9B672E7EA09400EB0BF4 /* Project object */;
+	rootObject = C6C2DA9C2EBD9CC100C7FE1A /* Project object */;
 }
