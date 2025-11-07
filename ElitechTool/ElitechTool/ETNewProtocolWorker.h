@@ -146,26 +146,17 @@ typedef NS_ENUM(NSInteger, PressUnitType) {
 + (float)emg_getMinChartPressure:(NSString *)pressUnit;
 + (float)emg_getShowPressure:(NSString *)pressUnit andInputVal:(float)val;
 
-+ (float)getTemperatureByPSI:(float)psiValue isHigh:(BOOL)isHigh byRefri:(NSString *)refri;
 
 + (BOOL)needIntTemp:(NSInteger)tem withUnit:(NSString *)unit;
-+ (NSString *)showICTTem:(NSInteger)tem withUnit:(NSString *)unit;
-+ (NSString *)showICTTem:(NSInteger)tem withShowUnit:(NSString *)unit;
-+ (NSString *)showICTTemMultiple100:(NSInteger)tem withUnit:(NSString *)unit;
-+ (NSString *)showICTTemMultiple100:(NSInteger)tem withShowUnit:(NSString *)unit;
 
 + (BOOL)weightValValid:(NSInteger)val;
 + (NSString *)lmcUnitFrom:(NSInteger)val;
-+ (NSString *)lmc_showDeviceStatus:(NSInteger)val;
-+ (NSString *)lmc_showRecordDeviceStatus:(NSInteger)val;
-+ (NSString *)rothenberger_lmc_showDeviceStatus:(NSInteger)val;
-+ (NSString *)rothenberger_lmc_showRecordDeviceStatus:(NSInteger)val;
+
 
 + (float)dealOzVal:(float)zoVal;
 
 //MARK: IPT-100
-+ (NSString *)showIPTTem:(NSInteger)tem withUnit:(NSString *)unit;
-+ (NSString *)showIPTTem:(NSInteger)tem withShowUnit:(NSString *)unit;
+
 + (NSString *)showIPTHum:(NSInteger)hum;
 + (NSString *)showIPTHumWithoutUnit:(NSInteger)hum;
 + (NSString *)iptSceneFrom:(NSInteger)val;
@@ -177,8 +168,6 @@ typedef NS_ENUM(NSInteger, PressUnitType) {
 + (NSUInteger)vgw760pro_decimalNumForUnit:(NSString *)unit;
 + (NSString *)vgw760pro_showVacuum:(NSInteger)vacuum andUnit:(NSString *)unit;
 + (NSString *)vgw760pro_showVacuum:(NSInteger)vacuum andShowUnit:(NSString *)unit;
-+ (NSString *)vgw760pro_showTemp:(NSInteger)tem withUnit:(NSString *)unit;
-+ (NSString *)vgw760pro_showTemp:(NSInteger)tem withShowUnit:(NSString *)unit;
 + (NSString *)vgw760pro_unitFrom:(NSInteger)val;
 
 + (float)vgw760pro_calVaccum:(float)oldPressure newVacUnit:(NSString *)newVacUnit;
@@ -188,18 +177,12 @@ typedef NS_ENUM(NSInteger, PressUnitType) {
 
 //MARK: ipt01
 + (BOOL)ipt01_valValid:(NSInteger)val;
-+ (NSString *)ipt01_showTemp:(NSInteger)tem withUnit:(NSString *)unit;
-+ (NSString *)ipt01_showTemp:(NSInteger)tem withShowUnit:(NSString *)unit;
 + (NSString *)ipt01_showHum:(NSInteger)hum;
 + (NSString *)ipt01_showHumWithoutUnit:(NSInteger)hum;
 
 //MARK: pt500pro
 + (BOOL)pt_valValid:(NSInteger)val;
 + (NSUInteger)pt_decimalNumForUnit:(NSString *)unit;
-+ (NSString *)pt_showPress:(NSInteger)press andUnit:(NSString *)unit;
-+ (NSString *)pt_showPress:(NSInteger)vacuum andShowUnit:(NSString *)unit;
-+ (NSString *)pt_showTemp:(NSInteger)tem withUnit:(NSString *)unit;
-+ (NSString *)pt_showTemp:(NSInteger)tem withShowUnit:(NSString *)unit;
 + (NSString *)pt_unitFrom:(NSInteger)val;
 + (NSInteger)pt_valFromUnit:(NSString *)unit;
 @end

@@ -667,8 +667,8 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
         return;
     }
     
-    UInt32 offset = [NSData dataToUnsignedInt:[data subdataWithRange:NSMakeRange(4, 4)]];
-    UInt16 numOfPoint = [NSData dataToUnsignedShort:[data subdataWithRange:NSMakeRange(8, 2)]];
+//    UInt32 offset = [NSData dataToUnsignedInt:[data subdataWithRange:NSMakeRange(4, 4)]];
+//    UInt16 numOfPoint = [NSData dataToUnsignedShort:[data subdataWithRange:NSMakeRange(8, 2)]];
     UInt16 pointLen = [NSData dataToUnsignedShort:[data subdataWithRange:NSMakeRange(10, 2)]];
     
     [self.allRecord appendData:[data subdataWithRange:NSMakeRange(12, data.length - 12)]];
