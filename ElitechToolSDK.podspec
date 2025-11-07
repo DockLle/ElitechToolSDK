@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "ElitechToolSDK"
-  spec.version      = "0.9.4"
+  spec.version      = "0.9.5"
   spec.summary      = "elitech真空计"
 
   # This description is used to generate tags and improve search results.
@@ -111,9 +111,7 @@ Pod::Spec.new do |spec|
 
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
   
-  spec.resource_bundles = {
-    'ElitechPrivacyInfo' => ['ElitechToolSDK/Assets/PrivacyInfo.xcprivacy']
-  }
+  spec.resource_bundles = { 'ElitechPrivacyInfo' => ['ElitechToolSDK/Assets/PrivacyInfo.xcprivacy'] }
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
