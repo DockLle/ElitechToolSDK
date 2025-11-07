@@ -15,7 +15,7 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "ElitechToolSDK"
+  spec.name         = "ElitechTool"
   spec.version      = "0.9.3"
   spec.summary      = "elitech真空计"
 
