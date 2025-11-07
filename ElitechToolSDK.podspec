@@ -111,7 +111,7 @@ Pod::Spec.new do |spec|
 
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
   
-  s.resource_bundles = {
+  spec.resource_bundles = {
     'ElitechPrivacyInfo' => ['ElitechToolSDK/Assets/PrivacyInfo.xcprivacy']
   }
 
