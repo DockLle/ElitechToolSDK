@@ -56,7 +56,7 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
 }
 
 
-- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
+- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral withRecordInterval:(NSUInteger)recordInterval
 {
     self = [super init];
     if (self) {
@@ -64,7 +64,7 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
         __weak typeof (self) weakSelf = self;
         [self setClockWithResult:^(BOOL res) {
             if (res) {
-                [weakSelf setRecordInterval:5 result:^(BOOL res) {
+                [weakSelf setRecordInterval:recordInterval result:^(BOOL res) {
                     if (res) {
                         
                     }

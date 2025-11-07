@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 初始化外设实例，确保在外设对象是已连接状态再初始化
 /// - Parameter peripheral: 外设对象
-- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral;
+- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral withRecordInterval:(NSUInteger)recordInterval;
 
 /// 检查是否为真空计设备（备注：若不使用用ElitechManager去管理蓝牙框架，自行使用系统蓝牙框架，可使用此方法鉴别目标设备）
 /// - Parameter advertisementData: 设备广播数据

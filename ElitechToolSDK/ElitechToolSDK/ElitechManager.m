@@ -12,13 +12,13 @@
 //#import "DeviceTypeDefine.h"
 
 
-NSString * const ETDeviceCodeVgwmini = @"0003";
+NSString * const ETDeviceCodeVgwmini = @"000B";
 NSString * const ETDeviceTypeNameVgwmini = @"VGW-mini";
 
 
-NSString* vgwMini_serviceUUID = @"FCFD";
-NSString* vgwMini_recvCharacteristicsUUID = @"FCFD";
-NSString* vgwMini_sendCharacteristicsUUID = @"FCFE";
+NSString* const vgwMini_serviceUUID = @"FCFD";
+NSString* const vgwMini_recvCharacteristicsUUID = @"FCFD";
+NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 
 
 @interface ElitechManager()<CBCentralManagerDelegate,CBPeripheralDelegate>
