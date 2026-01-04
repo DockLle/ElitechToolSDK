@@ -58,11 +58,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// 连接成功或失败回调
 /// - Parameters:
 ///   - isSuccess: 成功或失败
-- (void)elitechManager:(ElitechManager *)manager didConnect:(CBPeripheral *)peripheral result:(BOOL)isSuccess;
+///   - isReconnecting: 连接失败的时候，当前设备是否在重连
+- (void)elitechManager:(ElitechManager *)manager didConnect:(CBPeripheral *)peripheral result:(BOOL)isSuccess isReconnecting:(BOOL)isReconnecting;
 
 
 /// 连接断开回调
-- (void)elitechManager:(ElitechManager *)manager didDisconnect:(CBPeripheral *)peripheral error:(NSError *)error;
+/// - Parameters:
+///   - isReconnecting: 当前设备是否在重连
+- (void)elitechManager:(ElitechManager *)manager didDisconnect:(CBPeripheral *)peripheral isReconnecting:(BOOL)isReconnecting error:(nullable NSError *)error;
 
 /// 蓝牙接收数据
 - (void)elitechManager:(ElitechManager *)manager didReceiveData:(NSData *)data from:(CBPeripheral *)peripheral;
