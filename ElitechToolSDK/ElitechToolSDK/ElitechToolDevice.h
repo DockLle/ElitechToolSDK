@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 可配合系统蓝牙框架使用，也可配合ElitechManager使用，二选一
 @interface ElitechToolDevice : NSObject
 
+/// 系统外设对象
+@property(nonatomic,strong,readonly) CBPeripheral *peripheral;
+
 
 /// 初始化外设实例，确保在外设对象是已连接状态再初始化
 /// - Parameter peripheral: 外设对象

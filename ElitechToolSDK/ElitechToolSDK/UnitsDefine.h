@@ -135,7 +135,7 @@
 
 
 
-static NSString *const ETDeviceCodeVgwmini = @"0002";
+//static NSString *const ETDeviceCodeVgwmini = @"0002";
 static NSString *const ETDeviceCodeVgwminiNew = @"0003";
 static NSString *const ETDeviceCodeAIDMG = @"0120";
 static NSString *const ETDeviceCodeMS100 = @"0121";

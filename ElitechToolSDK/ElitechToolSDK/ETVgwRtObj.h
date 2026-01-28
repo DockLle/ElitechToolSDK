@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ETVgwRtObj : NSObject
 
 
-/// 真空值：设备实时检测的真空值，设备当前单位的数值
+/// 真空值：固定输出Pa的数值
 @property (nonatomic,copy) NSString *vaccum;
 
 /// 环境温度：当前环境温度，设备当前单位的数值
@@ -24,15 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 温差,设备当前单位的数值
 @property (nonatomic,copy) NSString *dtT;
 
-/// 当前真空单位
-/// micron：0
-/// mTorr：1
-/// inHg：2
-/// Pa：3
-/// Torr：4
-/// kPa：5
-/// mbar：6
-/// psia：7
+/// 当前真空单位(固定Pa)
 @property (nonatomic,copy) NSString *vacUnit;
 
 /// 当前温度单位，℃：0，℉：1

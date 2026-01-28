@@ -13,6 +13,7 @@
 #import "ETVgwRtObj.h"
 #import "DeviceTypeDefine.h"
 #import "NSObject+Utils.h"
+#import "UnitsDefine.h"
 
 @import CoreBluetooth;
 
@@ -368,14 +369,15 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
             UInt16 displayMode = [NSData dataToUnsignedShort:[rtData subdataWithRange:NSMakeRange(16, 2)]];
             UInt16 powerLevel = [NSData dataToUnsignedShort:[rtData subdataWithRange:NSMakeRange(18, 2)]];
             
-            NSString *vunitStr = [ETNewProtocolWorker vUnitFrom:vUnit];
+//            NSString *vunitStr = [ETNewProtocolWorker vUnitFrom:vUnit];
+            NSString *vunitStr = UPa;//美的要求固定输入pa
             NSString *tunitStr = [ETNewProtocolWorker tUnitFrom:tUnit];
             
             if (!_realTimeObj) {
                 _realTimeObj = [[ETVgwRtObj alloc] init];
             }
             if (vaccum >= VAC_ARG_NONE) {
-                _realTimeObj.vaccum = @"-1000";
+                _realTimeObj.vaccum = @"FF";
             }
             else
             {
@@ -403,22 +405,22 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
                 float s_pcb = t_pcb * 0.1;
                 s_pcb = [UnitTool temperatureChangeWithOldValue:s_pcb oldUnit:nil aimUnit:tunitStr];
                 _realTimeObj.tamb = [NSString stringWithFormat:@"%.1f",s_pcb];
-                _realTimeObj.th2o = @"-1000";
-                _realTimeObj.dtT = @"-1000";
+                _realTimeObj.th2o = @"FF";
+                _realTimeObj.dtT = @"FF";
             }
             else if (t_h20 < TEMP_ARG_NONE)
             {
                 float s_h2o = t_h20 * 0.1;
                 s_h2o = [UnitTool temperatureChangeWithOldValue:s_h2o oldUnit:nil aimUnit:tunitStr];
-                _realTimeObj.tamb = @"-1000";
+                _realTimeObj.tamb = @"FF";
                 _realTimeObj.th2o = [NSString stringWithFormat:@"%.1f",s_h2o];
-                _realTimeObj.dtT = @"-1000";
+                _realTimeObj.dtT = @"FF";
             }
             else
             {
-                _realTimeObj.tamb = @"-1000";
-                _realTimeObj.th2o = @"-1000";
-                _realTimeObj.dtT = @"-1000";
+                _realTimeObj.tamb = @"FF";
+                _realTimeObj.th2o = @"FF";
+                _realTimeObj.dtT = @"FF";
             }
             
             
@@ -713,7 +715,7 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
             
             NSString *vacStr = @"";
             if (vacuum >= VAC_ARG_NONE) {
-                vacStr = @"-1000";
+                vacStr = @"FF";
             }
             else
             {
@@ -722,7 +724,7 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
             
             NSString *TH2OStr = @"";
             if (TH2O >= TEMP_ARG_NONE) {
-                TH2OStr = @"-1000";
+                TH2OStr = @"FF";
             }
             else
             {
@@ -731,7 +733,7 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
             
             NSString *TambStr = @"";
             if (Tamb >= TEMP_ARG_NONE) {
-                TambStr = @"-1000";
+                TambStr = @"FF";
             }
             else
             {

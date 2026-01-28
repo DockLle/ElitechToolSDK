@@ -38,7 +38,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 @implementation PeripheralReconnectInfo
 - (instancetype)init {
     if (self = [super init]) {
-        self.maxReconnectTimes = 5;       // 每个设备默认最大重连10次
+        self.maxReconnectTimes = 5;       // 每个设备默认最大重连5次
         self.reconnectInterval = 3.0;     // 每个设备默认3秒重试一次
         self.currentReconnectCount = 0;
     }
@@ -153,10 +153,12 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 /// @param peripheralUUID 外设UUID字符串
 - (void)stopReconnectForPeripheralUUID:(NSString *)peripheralUUID {
     PeripheralReconnectInfo *info = self.peripheralReconnectDict[peripheralUUID];
-    [info.reconnectTimer invalidate];
-    info.reconnectTimer = nil;
-    info.currentReconnectCount = 0;
-    NSLog(@"停止设备：%@ 的重连", peripheralUUID);
+    if (info) {
+        [info.reconnectTimer invalidate];
+        info.reconnectTimer = nil;
+        info.currentReconnectCount = 0;
+        NSLog(@"停止设备：%@ 的重连", peripheralUUID);
+    }
 }
 
 /// 尝试重连指定外设（定时器回调）
@@ -280,10 +282,20 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 {
     if (error) {
         PeripheralReconnectInfo *info = self.peripheralReconnectDict[peripheral.identifier.UUIDString];
-        if (info && (info.currentReconnectCount >= info.maxReconnectTimes)) {
-            for (id<ElitechManagerDelegate> obj in self.delegates) {
-                if([obj respondsToSelector:@selector(elitechManager:didDisconnect:isReconnecting:error:)]) {
-                    [obj elitechManager:self didDisconnect:peripheral isReconnecting:NO error:error];
+        if (info) {
+            if (info.currentReconnectCount >= info.maxReconnectTimes) {
+                for (id<ElitechManagerDelegate> obj in self.delegates) {
+                    if([obj respondsToSelector:@selector(elitechManager:didDisconnect:isReconnecting:error:)]) {
+                        [obj elitechManager:self didDisconnect:peripheral isReconnecting:NO error:error];
+                    }
+                }
+            }
+            else
+            {
+                for (id<ElitechManagerDelegate> obj in self.delegates) {
+                    if([obj respondsToSelector:@selector(elitechManager:didDisconnect:isReconnecting:error:)]) {
+                        [obj elitechManager:self didDisconnect:peripheral isReconnecting:YES error:error];
+                    }
                 }
             }
         }
@@ -366,6 +378,8 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
         //通知已打开
         if (characteristic.isNotifying) {
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:vgwMini_recvCharacteristicsUUID]]) {
+                NSString *uuidStr = peripheral.identifier.UUIDString;
+                [self stopReconnectForPeripheralUUID:uuidStr];
                 for (id<ElitechManagerDelegate> obj in self.delegates) {
                     if([obj respondsToSelector:@selector(elitechManager:didConnect:result:isReconnecting:)]) {
                         [obj elitechManager:self didConnect:peripheral result:YES isReconnecting:NO];
