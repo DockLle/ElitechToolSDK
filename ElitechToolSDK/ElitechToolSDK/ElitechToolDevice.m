@@ -719,7 +719,8 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
             }
             else
             {
-                vacStr = [NSString stringWithFormat:@"%u",(UInt32)vacuum];
+                float vv = [UnitTool calVaccum:vacuum newVacUnit:UPa];
+                vacStr = [@(vv) maxFractionDigits:1];
             }
             
             NSString *TH2OStr = @"";
