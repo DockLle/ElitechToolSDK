@@ -17,7 +17,7 @@
 
 @import CoreBluetooth;
 
-static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
+static NSString *const hostPort = @"https://www.i-elitech.net";
 
 @interface ElitechToolDevice()<NSURLSessionDownloadDelegate>
 
@@ -45,6 +45,7 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
 @property (nonatomic,strong) void(^checkUpdateCallback)(BOOL canUpdate,NSString *version,NSString *description);
 @property (nonatomic,strong) void(^updateCallBack)(BOOL isDownloaded,float updateProgress,NSError *err);
 
+@property (nonatomic,strong) void(^snCallBack)(NSString *sn);
 
 @property (nonatomic,copy) NSString *remoteCode;
 @property (nonatomic,copy) NSString *swv;
@@ -88,8 +89,9 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
     }
     
     NSData *deviceMode = [manufacturerData subdataWithRange:NSMakeRange(0, 2)];
-    UInt16 type = [NSData dataToUnsignedShort:deviceMode];
-    if (type == 0x0007) {
+    NSString *type = [NSData hexadecimalStringWithData:deviceMode];
+//    UInt16 type = [NSData dataToUnsignedShort:deviceMode];
+    if ([type isEqualToString:ETDeviceCodeVgwmini]) {
         return YES;
     }
     
@@ -242,6 +244,28 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
                 }
             }
         }
+        else if (model.funcCode == ETFuncCodeType02)
+        {
+            if (model.subFuncCode == REG_COMM_SNUNIQ)
+            {
+                if (model.data.length >= 36) {
+                    NSString *serial = [[NSString alloc] initWithData:[model.data subdataWithRange:NSMakeRange(4, 32)] encoding:NSASCIIStringEncoding];
+                    
+                    if (self.snCallBack) {
+                        self.snCallBack(serial);
+                        self.snCallBack = nil;
+                    }
+                }
+                else
+                {
+                    if (self.snCallBack) {
+                        self.snCallBack(@"");
+                        self.snCallBack = nil;
+                    }
+                }
+                
+            }
+        }
         else if (model.funcCode == ETFuncCodeType07)
         {
             
@@ -362,7 +386,7 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
             UInt32 vaccum = [NSData dataToUnsignedInt:[rtData subdataWithRange:NSMakeRange(0, 4)]];
             SInt16 t_pcb = [NSData dataToShort:[rtData subdataWithRange:NSMakeRange(4, 2)]];
             SInt16 t_h20 = [NSData dataToShort:[rtData subdataWithRange:NSMakeRange(6, 2)]];
-            UInt16 vUnit = [NSData dataToUnsignedShort:[rtData subdataWithRange:NSMakeRange(8, 2)]];
+//            UInt16 vUnit = [NSData dataToUnsignedShort:[rtData subdataWithRange:NSMakeRange(8, 2)]];
             UInt16 tUnit = [NSData dataToUnsignedShort:[rtData subdataWithRange:NSMakeRange(10, 2)]];
             UInt16 recordStatus = [NSData dataToUnsignedShort:[rtData subdataWithRange:NSMakeRange(12, 2)]];
             UInt16 recordInterval = [NSData dataToUnsignedShort:[rtData subdataWithRange:NSMakeRange(14, 2)]];
@@ -529,6 +553,17 @@ static NSString *const hostPort = @"http://test.icoldcloud.com:10023";
         if (self.updateCallBack) {
             self.updateCallBack(NO, 0, err);
         }
+    }
+}
+
+- (void)getSNWithresult:(void(^)(NSString *_Nullable sn))result
+{
+    NSData *data = [self.worker readDataWithSubFunc:REG_COMM_SNUNIQ subFuncCount:16];
+    self.snCallBack = result;
+    BOOL res = [self write:self.peripheral value:data];
+    if (!res)
+    {
+        result(nil);
     }
 }
 

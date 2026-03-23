@@ -173,17 +173,20 @@ extension HomeVM: ElitechManagerDelegate
         }
     }
     
-    func elitechManager(_ manager: ElitechManager, didConnect peripheral: CBPeripheral, result isSuccess: Bool) {
-        
-        if isSuccess {
+    func elitechManager(_ manager: ElitechManager, didConnect peripheral: CBPeripheral, result isSuccess: Bool, isReconnecting: Bool) {
+        if isSuccess {//连接成功
             vgwmini = peripheral
             initDevice(peripheral: peripheral)
             isLoading = false
             bleIsConnect = true;
         }
+        else//失败
+        {
+            //可以isReconnecting状态做出正在重连提示之类的
+        }
     }
     
-    func elitechManager(_ manager: ElitechManager, didDisconnect peripheral: CBPeripheral, error: any Error) {
+    func elitechManager(_ manager: ElitechManager, didDisconnect peripheral: CBPeripheral, isReconnecting: Bool, error: (any Error)?) {
         resetStatusForDetailPage()
     }
     

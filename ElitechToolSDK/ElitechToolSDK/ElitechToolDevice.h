@@ -90,6 +90,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 升级更新
 /// isDownloaded：固件包是否下载完成 ，updateProgress：在完成下载固件包后，正式进行更新的的进度；
 - (void)updateSoftware:(void(^)(BOOL isDownloaded,float updateProgress,NSError *_Nullable err))result;
+
+/// 获取设备SN
+- (void)getSNWithresult:(void(^)(NSString *_Nullable sn))result;
 @end
 
 NS_ASSUME_NONNULL_END
