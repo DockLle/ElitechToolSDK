@@ -12,7 +12,7 @@
 //#import "DeviceTypeDefine.h"
 
 
-NSString * const ETDeviceCodeVgwmini = @"000b";
+NSString * const ETDeviceCodeVgwmini = @"0003";
 NSString * const ETDeviceTypeNameVgwmini = @"VGW-mini";
 
 
@@ -81,15 +81,21 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 
 - (void)addDelegate:(id<ElitechManagerDelegate>)delegate
 {
-    [self.delegates addPointer:nil];
-    [self.delegates compact];
-    [self.delegates addPointer:(__bridge void *)delegate];
+    @synchronized (self.delegates) {
+        [self.delegates addPointer:nil];
+        [self.delegates compact];
+        [self.delegates addPointer:(__bridge void *)delegate];
+    }
 }
 
 - (void)removeDelegate:(id<ElitechManagerDelegate>)delegate
 {
-    NSUInteger index = [self.class et_indexOfPointer:(__bridge void *)delegate inArray:self.delegates];
-    [self.delegates removePointerAtIndex:index];
+    @synchronized (self.delegates) {
+        NSUInteger index = [self.class et_indexOfPointer:(__bridge void *)delegate inArray:self.delegates];
+        if (index != NSNotFound) {
+            [self.delegates removePointerAtIndex:index];
+        }
+    }
 }
 
 //- (void)addConnectedPeripheral:(NSObject *)per
@@ -117,6 +123,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 //断开连接
 - (void)disconnect:(CBPeripheral *)peripheral
 {
+    [self stopReconnectForPeripheralUUID:peripheral.identifier.UUIDString];
     [_centeralManager cancelPeripheralConnection:peripheral];
 }
 
@@ -156,7 +163,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
     if (info) {
         [info.reconnectTimer invalidate];
         info.reconnectTimer = nil;
-        info.currentReconnectCount = 0;
+        [self.peripheralReconnectDict removeObjectForKey:peripheralUUID];
         NSLog(@"停止设备：%@ 的重连", peripheralUUID);
     }
 }
@@ -220,7 +227,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 //本地蓝牙设备状态更新代理
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
-    for (id<ElitechManagerDelegate> obj in self.delegates) {
+    for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
         if([obj respondsToSelector:@selector(elitechManagerDidUpdateState:)]) {
             [obj elitechManagerDidUpdateState:self];
         }
@@ -259,7 +266,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
         scanData.modeCode = type;
         scanData.modeName = ETDeviceTypeNameVgwmini;
         
-        for (id<ElitechManagerDelegate> obj in self.delegates) {
+        for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
             if([obj respondsToSelector:@selector(elitechManager:didDiscoverPeripheral:)]) {
                 [obj elitechManager:self didDiscoverPeripheral:scanData];
             }
@@ -284,7 +291,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
         PeripheralReconnectInfo *info = self.peripheralReconnectDict[peripheral.identifier.UUIDString];
         if (info) {
             if (info.currentReconnectCount >= info.maxReconnectTimes) {
-                for (id<ElitechManagerDelegate> obj in self.delegates) {
+                for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
                     if([obj respondsToSelector:@selector(elitechManager:didDisconnect:isReconnecting:error:)]) {
                         [obj elitechManager:self didDisconnect:peripheral isReconnecting:NO error:error];
                     }
@@ -292,7 +299,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
             }
             else
             {
-                for (id<ElitechManagerDelegate> obj in self.delegates) {
+                for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
                     if([obj respondsToSelector:@selector(elitechManager:didDisconnect:isReconnecting:error:)]) {
                         [obj elitechManager:self didDisconnect:peripheral isReconnecting:YES error:error];
                     }
@@ -302,7 +309,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
         else
         {
             [self startReconnectForPeripheral:peripheral];
-            for (id<ElitechManagerDelegate> obj in self.delegates) {
+            for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
                 if([obj respondsToSelector:@selector(elitechManager:didDisconnect:isReconnecting:error:)]) {
                     [obj elitechManager:self didDisconnect:peripheral isReconnecting:YES error:error];
                 }
@@ -311,7 +318,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
     }
     else
     {
-        for (id<ElitechManagerDelegate> obj in self.delegates) {
+        for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
             if([obj respondsToSelector:@selector(elitechManager:didDisconnect:isReconnecting:error:)]) {
                 [obj elitechManager:self didDisconnect:peripheral isReconnecting:NO error:nil];
             }
@@ -324,7 +331,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
 {
     PeripheralReconnectInfo *info = self.peripheralReconnectDict[peripheral.identifier.UUIDString];
     if (info && (info.currentReconnectCount >= info.maxReconnectTimes)) {
-        for (id<ElitechManagerDelegate> obj in self.delegates) {
+        for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
             if([obj respondsToSelector:@selector(elitechManager:didConnect:result:isReconnecting:)]) {
                 [obj elitechManager:self didConnect:peripheral result:NO isReconnecting:NO];
             }
@@ -333,7 +340,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
     else
     {
         [self startReconnectForPeripheral:peripheral];
-        for (id<ElitechManagerDelegate> obj in self.delegates) {
+        for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
             if([obj respondsToSelector:@selector(elitechManager:didConnect:result:isReconnecting:)]) {
                 [obj elitechManager:self didConnect:peripheral result:NO isReconnecting:YES];
             }
@@ -380,7 +387,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
             if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:vgwMini_recvCharacteristicsUUID]]) {
                 NSString *uuidStr = peripheral.identifier.UUIDString;
                 [self stopReconnectForPeripheralUUID:uuidStr];
-                for (id<ElitechManagerDelegate> obj in self.delegates) {
+                for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
                     if([obj respondsToSelector:@selector(elitechManager:didConnect:result:isReconnecting:)]) {
                         [obj elitechManager:self didConnect:peripheral result:YES isReconnecting:NO];
                     }
@@ -403,7 +410,7 @@ NSString* const vgwMini_sendCharacteristicsUUID = @"FCFE";
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:vgwMini_recvCharacteristicsUUID]])
     {
 //        NSLog(@"接收---》%@",characteristic.value);
-        for (id<ElitechManagerDelegate> obj in self.delegates) {
+        for (id<ElitechManagerDelegate> obj in self.delegates.allObjects) {
             if([obj respondsToSelector:@selector(elitechManager:didReceiveData:from:)]) {
                 [obj elitechManager:self didReceiveData:characteristic.value from:peripheral];
             }

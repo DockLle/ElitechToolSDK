@@ -51,6 +51,12 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 @property (nonatomic,copy) NSString *swv;
 @property (nonatomic,strong) NSData *appData;// 服务器下载的软件包
 
+// 命令队列
+@property (nonatomic, assign) BOOL isBusy;
+@property (nonatomic, strong) NSMutableArray *pendingCommands;
+@property (nonatomic, assign) BOOL isReadingData;
+@property (nonatomic, assign) BOOL isUpdatingFirmware;
+
 @end
 @implementation ElitechToolDevice
 {
@@ -78,6 +84,104 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
     return self;
 }
 
+#pragma mark - command queue
+
+- (NSMutableArray *)pendingCommands {
+    if (!_pendingCommands) {
+        _pendingCommands = [NSMutableArray array];
+    }
+    return _pendingCommands;
+}
+
+- (void)performCommand:(void(^)(ElitechToolDevice *device, void(^completed)(void)))command {
+    [self performCommand:command withTimeout:5.0];
+}
+
+- (void)performCommand:(void(^)(ElitechToolDevice *device, void(^completed)(void)))command
+           withTimeout:(NSTimeInterval)timeout {
+    __weak typeof(self) weakSelf = self;
+    dispatch_block_t wrappedBlock = ^{
+        typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        __block BOOL hasCompleted = NO;
+        void (^completed)(void) = ^{
+            if (hasCompleted) return;
+            hasCompleted = YES;
+            [strongSelf _finishCurrentCommand];
+        };
+        command(strongSelf, completed);
+        // 启动超时
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(timeout * NSEC_PER_SEC)),
+                       dispatch_get_main_queue(), ^{
+            if (!hasCompleted) {
+                completed();
+            }
+        });
+    };
+
+    @synchronized (self) {
+        if (self.isBusy) {
+            [self.pendingCommands addObject:wrappedBlock];
+            return;
+        }
+        self.isBusy = YES;
+    }
+
+    dispatch_async(dispatch_get_main_queue(), wrappedBlock);
+}
+
+- (void)performExclusiveCommand:(void(^)(ElitechToolDevice *device, void(^completed)(void)))command
+                   exclusiveKey:(NSString *)exclusiveKey
+                 conflictBlock:(void(^)(void))conflictBlock {
+    BOOL shouldReject = NO;
+
+    @synchronized (self) {
+        if (self.isReadingData || self.isUpdatingFirmware) {
+            shouldReject = YES;
+        }
+        if (!shouldReject) {
+            if ([exclusiveKey isEqualToString:@"readData"]) {
+                self.isReadingData = YES;
+            } else if ([exclusiveKey isEqualToString:@"firmware"]) {
+                self.isUpdatingFirmware = YES;
+            }
+        }
+    }
+
+    if (shouldReject) {
+        dispatch_async(dispatch_get_main_queue(), conflictBlock);
+        return;
+    }
+
+    __weak typeof(self) weakSelf = self;
+    [self performCommand:^(ElitechToolDevice *device, void (^innerCompleted)(void)) {
+        command(device, ^{
+            typeof(self) strongSelf = weakSelf;
+            if (strongSelf) {
+                if ([exclusiveKey isEqualToString:@"readData"]) {
+                    strongSelf.isReadingData = NO;
+                } else if ([exclusiveKey isEqualToString:@"firmware"]) {
+                    strongSelf.isUpdatingFirmware = NO;
+                }
+            }
+            innerCompleted();
+        });
+    }];
+}
+
+- (void)_finishCurrentCommand {
+    @synchronized (self) {
+        self.isBusy = NO;
+
+        if (self.pendingCommands.count > 0) {
+            dispatch_block_t next = self.pendingCommands.firstObject;
+            [self.pendingCommands removeObjectAtIndex:0];
+            self.isBusy = YES;
+            dispatch_async(dispatch_get_main_queue(), next);
+        }
+    }
+}
+
 
 #pragma mark - open
 
@@ -100,25 +204,30 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 
 - (void)setClockWithResult:(void(^)(BOOL res))result
 {
-    //4字节：时间戳  ，2字节的偏移（8时区：8*60)
-    UInt32 timeInterval = [[NSDate date] timeIntervalSince1970];
-    timeInterval = NSSwapHostIntToBig(timeInterval);
-    NSInteger sec = NSTimeZone.systemTimeZone.secondsFromGMT;
-    SInt16 min = sec / 60;
-    min = NSSwapHostShortToBig(min);
-    
-    NSMutableData *content = [NSMutableData data];
-    [content appendBytes:&timeInterval length:sizeof(timeInterval)];
-    [content appendBytes:&min length:sizeof(min)];
-    
-    NSData *data = [self.worker setClockData:content];
-    
-    self.clockCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(NO);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        //4字节：时间戳  ，2字节的偏移（8时区：8*60)
+        UInt32 timeInterval = [[NSDate date] timeIntervalSince1970];
+        timeInterval = NSSwapHostIntToBig(timeInterval);
+        NSInteger sec = NSTimeZone.systemTimeZone.secondsFromGMT;
+        SInt16 min = sec / 60;
+        min = NSSwapHostShortToBig(min);
+
+        NSMutableData *content = [NSMutableData data];
+        [content appendBytes:&timeInterval length:sizeof(timeInterval)];
+        [content appendBytes:&min length:sizeof(min)];
+
+        NSData *data = [device.worker setClockData:content];
+
+        device.clockCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
 }
 
 //- (void)setRTInterval:(NSUInteger)interval result:(void(^)(BOOL res))result
@@ -135,95 +244,160 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 
 - (void)clearRecordWithResult:(void(^)(BOOL res))result
 {
-    NSData *data = [self.worker setDataWithSubFunc:REG_COMM_REC_CLEAR andContent:0];
-    self.clearCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(NO);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setDataWithSubFunc:REG_COMM_REC_CLEAR andContent:0];
+        device.clearCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
 }
 
 - (void)setRecordEnable:(BOOL)enable result:(void(^)(BOOL res))result
 {
-    NSData *data = [self.worker setDataWithSubFunc:REG_COMM_REC_EN andContent:enable];
-    self.recordEnableCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(NO);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setDataWithSubFunc:REG_COMM_REC_EN andContent:enable];
+        device.recordEnableCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
 }
 
 - (void)setRecordInterval:(NSInteger)interval result:(void(^)(BOOL res))result
 {
-    NSData *data = [self.worker setDataWithSubFunc:REG_COMM_REC_TIME andContent:interval];
-    self.recordIntervalCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(NO);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setDataWithSubFunc:REG_COMM_REC_TIME andContent:interval];
+        device.recordIntervalCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
 }
 
 - (void)setVacuumUnit:(NSInteger)unit result:(void(^)(BOOL res))result
 {
-    NSData *data = [self.worker setDataWithSubFunc:REG_COMM_U_VACCUM andContent:unit];
-    self.vUnitCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(NO);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setDataWithSubFunc:REG_COMM_U_VACCUM andContent:unit];
+        device.vUnitCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
 }
+
 - (void)setTemperatureUnit:(NSInteger)unit result:(void(^)(BOOL res))result
 {
-    NSData *data = [self.worker setDataWithSubFunc:REG_COMM_U_TEMP andContent:unit];
-    self.tUnitCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(NO);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setDataWithSubFunc:REG_COMM_U_TEMP andContent:unit];
+        device.tUnitCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
 }
 
 
 - (void)startVacuumingWithResult:(void(^)(BOOL res))result
 {
-    __weak typeof (self) weakSelf = self;
-    [self clearRecordWithResult:^(BOOL res) {
-        if (res)
-        {
-            [weakSelf setRecordEnable:YES result:result];
-        }
-        else
-        {
-            result(res);
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        __block BOOL chainFinished = NO;
+        void (^finish)(BOOL) = ^(BOOL res) {
+            if (chainFinished) return;
+            chainFinished = YES;
+            if (result) result(res);
+            completed();
+        };
+
+        __weak typeof(device) weakDevice = device;
+        NSData *clearData = [device.worker setDataWithSubFunc:REG_COMM_REC_CLEAR andContent:0];
+        device.clearCallBack = ^(BOOL res) {
+            __strong typeof(weakDevice) strongDevice = weakDevice;
+            if (!strongDevice) { finish(NO); return; }
+            if (res) {
+                NSData *enableData = [strongDevice.worker setDataWithSubFunc:REG_COMM_REC_EN andContent:YES];
+                strongDevice.recordEnableCallBack = ^(BOOL res2) {
+                    finish(res2);
+                };
+                [strongDevice write:strongDevice.peripheral value:enableData];
+            } else {
+                finish(NO);
+            }
+        };
+        BOOL ok = [device write:device.peripheral value:clearData];
+        if (!ok) {
+            finish(NO);
         }
     }];
 }
 
 - (void)endVacuumingWithResult:(void(^)(BOOL res))result
 {
-    [self setRecordEnable:NO result:result];
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setDataWithSubFunc:REG_COMM_REC_EN andContent:NO];
+        device.recordEnableCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
 }
 
 - (void)readRecordWithResult:(void(^)(float progress,NSError *_Nullable err,NSArray<NSDictionary<NSString*,NSString*> *> *records))result
 {
-    
-    UInt16 con = 0;
-    con = NSSwapHostShortToBig(con);
-    NSData *data = [self.worker setReadHistoryDataWithFunc:1 andContent:[NSData dataWithBytes:&con length:sizeof(con)]];
-    
-    self.recordResultCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:1000 userInfo:@{NSLocalizedDescriptionKey:@"外设未连接"}];
-        self.recordResultCallBack(0, err, @[]);
-        self.recordResultCallBack = nil;
-        return;
-    }
+    [self performExclusiveCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        UInt16 con = 0;
+        con = NSSwapHostShortToBig(con);
+        NSData *data = [device.worker setReadHistoryDataWithFunc:1 andContent:[NSData dataWithBytes:&con length:sizeof(con)]];
+
+        __weak typeof(device) weakDevice = device;
+        device.recordResultCallBack = ^(float progress, NSError *err, NSArray *records) {
+            if (result) result(progress, err, records);
+            if (err || progress >= 100.0) {
+                weakDevice.recordResultCallBack = nil;
+                completed();
+            }
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:1000 userInfo:@{NSLocalizedDescriptionKey:@"外设未连接"}];
+            if (result) result(0, err, @[]);
+            device.recordResultCallBack = nil;
+            completed();
+        }
+    } exclusiveKey:@"readData" conflictBlock:^{
+        NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:1002 userInfo:@{NSLocalizedDescriptionKey:@"设备正忙，请稍后再试"}];
+        result(0, err, @[]);
+    }];
 }
 
 
@@ -478,13 +652,18 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 
 - (void)getDeviceVersion:(void(^)(NSString *swv,NSString *remoteCode))result
 {
-    NSData *data = [self.worker setUpdateDataWithFunc:1 andContent:nil];
-    self.verCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(nil,nil);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setUpdateDataWithFunc:1 andContent:nil];
+        device.verCallBack = ^(NSString *swv, NSString *remoteCode) {
+            if (result) result(swv, remoteCode);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(nil, nil);
+            completed();
+        }
+    }];
 }
 
 - (void)checkForUpdate:(void(^)(BOOL canUpdate,NSString *version,NSString *description))result
@@ -508,18 +687,25 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 
 - (void)updateSoftware:(void(^)(BOOL isDownloaded,float updateProgress,NSError *_Nullable err))result
 {
-    if (self.remoteCode.length > 0 && self.swv.length > 0) {
-        self.updateCallBack = result;
-        
-        [self ota_downloadHardware:self.remoteCode andSoftversion:self.swv];
-        
-    }
-    else
-    {
+    if (self.remoteCode.length == 0 || self.swv.length == 0) {
         NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:2001 userInfo:@{NSLocalizedDescriptionKey:@"请先调用检查更新"}];
-        self.updateCallBack(NO, 0, err);
+        result(NO, 0, err);
+        return;
     }
-    
+
+    [self performExclusiveCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        device.updateCallBack = ^(BOOL isDownloaded, float updateProgress, NSError *err) {
+            if (result) result(isDownloaded, updateProgress, err);
+            BOOL isFinal = (!isDownloaded) || (updateProgress >= 100);
+            if (isFinal) {
+                completed();
+            }
+        };
+        [device ota_downloadHardware:device.remoteCode andSoftversion:device.swv];
+    } exclusiveKey:@"firmware" conflictBlock:^{
+        NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:1002 userInfo:@{NSLocalizedDescriptionKey:@"设备正忙，请稍后再试"}];
+        result(NO, 0, err);
+    }];
 }
 
 - (void)sendStartUpdateCmd:(unsigned int)filesize
@@ -558,13 +744,27 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 
 - (void)getSNWithresult:(void(^)(NSString *_Nullable sn))result
 {
-    NSData *data = [self.worker readDataWithSubFunc:REG_COMM_SNUNIQ subFuncCount:16];
-    self.snCallBack = result;
-    BOOL res = [self write:self.peripheral value:data];
-    if (!res)
-    {
-        result(nil);
-    }
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker readDataWithSubFunc:REG_COMM_SNUNIQ subFuncCount:16];
+        device.snCallBack = ^(NSString *sn) {
+            if (result) result(sn);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(nil);
+            completed();
+        }
+    }];
+}
+
+- (void)shutdown
+{
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker setDataWithSubFunc:REG_COMM_PWR_OFF andContent:1];
+        [device write:device.peripheral value:data];
+        // 关机指令无响应，超时自动释放队列
+    }];
 }
 
 #pragma mark - private
@@ -697,7 +897,7 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
         
         if (self.recordResultCallBack)
         {
-            self.recordResultCallBack(1, nil, @[]);
+            self.recordResultCallBack(100, nil, @[]);
             self.recordResultCallBack = nil;
         }
         
@@ -707,7 +907,15 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 //    UInt32 offset = [NSData dataToUnsignedInt:[data subdataWithRange:NSMakeRange(4, 4)]];
 //    UInt16 numOfPoint = [NSData dataToUnsignedShort:[data subdataWithRange:NSMakeRange(8, 2)]];
     UInt16 pointLen = [NSData dataToUnsignedShort:[data subdataWithRange:NSMakeRange(10, 2)]];
-    
+    if (pointLen < 12) {
+        if (self.recordResultCallBack) {
+            NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:1000 userInfo:@{NSLocalizedDescriptionKey:@"无效的记录点长度"}];
+            self.recordResultCallBack(0, err, @[]);
+            self.recordResultCallBack = nil;
+        }
+        return;
+    }
+
     [self.allRecord appendData:[data subdataWithRange:NSMakeRange(12, data.length - 12)]];
     
     //回复
@@ -838,51 +1046,53 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 
 // 下载完成回调
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
-    // 下载完成，文件被保存在临时位置 location
-    
-    self.appData = [NSData dataWithContentsOfURL:location];
-    
+    NSData *data = [NSData dataWithContentsOfURL:location];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.appData = data;
+    });
 }
 
 // 任务完成回调（无论成功还是失败）
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
-    if (error) {
-        self.appData = nil;
-        NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:2000 userInfo:@{NSLocalizedDescriptionKey:@"下载升级包出错"}];
-        if (self.updateCallBack) {
-            self.updateCallBack(NO, 0, err);
-        }
-    } else {
-        
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
-        NSInteger statusCode =  httpResponse.statusCode;
-        
-        if (statusCode == 200) {
-            if ([httpResponse.MIMEType containsString:@"json"]) {
-                self.appData = nil;
-                NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:2000 userInfo:@{NSLocalizedDescriptionKey:@"下载升级包出错"}];
-                if (self.updateCallBack) {
-                    self.updateCallBack(NO, 0, err);
-                }
-                return;
-            }
-            
-            if (self.updateCallBack) {
-                self.updateCallBack(YES, 0, nil);
-            }
-            
-            [self sendStartUpdateCmd:(unsigned int)self.appData.length];
-            
-        }
-        else
-        {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (error) {
             self.appData = nil;
             NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:2000 userInfo:@{NSLocalizedDescriptionKey:@"下载升级包出错"}];
             if (self.updateCallBack) {
                 self.updateCallBack(NO, 0, err);
             }
+        } else {
+
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+            NSInteger statusCode =  httpResponse.statusCode;
+
+            if (statusCode == 200) {
+                if ([httpResponse.MIMEType containsString:@"json"]) {
+                    self.appData = nil;
+                    NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:2000 userInfo:@{NSLocalizedDescriptionKey:@"下载升级包出错"}];
+                    if (self.updateCallBack) {
+                        self.updateCallBack(NO, 0, err);
+                    }
+                    return;
+                }
+
+                if (self.updateCallBack) {
+                    self.updateCallBack(YES, 0, nil);
+                }
+
+                [self sendStartUpdateCmd:(unsigned int)self.appData.length];
+
+            }
+            else
+            {
+                self.appData = nil;
+                NSError *err = [NSError errorWithDomain:NSCocoaErrorDomain code:2000 userInfo:@{NSLocalizedDescriptionKey:@"下载升级包出错"}];
+                if (self.updateCallBack) {
+                    self.updateCallBack(NO, 0, err);
+                }
+            }
         }
-    }
+    });
 }
 
 #pragma mark - getter

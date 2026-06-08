@@ -93,6 +93,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 获取设备SN
 - (void)getSNWithresult:(void(^)(NSString *_Nullable sn))result;
+
+//关机
+- (void)shutdown;
 @end
 
 NS_ASSUME_NONNULL_END

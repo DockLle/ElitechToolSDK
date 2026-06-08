@@ -8,15 +8,57 @@
 
 /* Begin PBXBuildFile section */
 		C62716FB2E7177C7009E3B75 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C62716FA2E7177C7009E3B75 /* AlertToast */; };
+		C654EEF12FD69384006FCCBC /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C654EED32FD69384006FCCBC /* PrivacyInfo.xcprivacy */; };
+		C654EEF22FD69384006FCCBC /* ETNewProtocolWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEE02FD69384006FCCBC /* ETNewProtocolWorker.m */; };
+		C654EEF32FD69384006FCCBC /* ETVgwRtObj.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEE42FD69384006FCCBC /* ETVgwRtObj.m */; };
+		C654EEF42FD69384006FCCBC /* ETBleScanData.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEDC2FD69384006FCCBC /* ETBleScanData.m */; };
+		C654EEF52FD69384006FCCBC /* ETTimerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEE22FD69384006FCCBC /* ETTimerTool.m */; };
+		C654EEF62FD69384006FCCBC /* UnitTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEEB2FD69384006FCCBC /* UnitTool.m */; };
+		C654EEF72FD69384006FCCBC /* NSData+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEE62FD69384006FCCBC /* NSData+Util.m */; };
+		C654EEF82FD69384006FCCBC /* ElitechToolDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EED92FD69384006FCCBC /* ElitechToolDevice.m */; };
+		C654EEF92FD69384006FCCBC /* ElitechManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EED72FD69384006FCCBC /* ElitechManager.m */; };
+		C654EEFA2FD69384006FCCBC /* ETNewProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEDE2FD69384006FCCBC /* ETNewProtocol.m */; };
+		C654EEFB2FD69384006FCCBC /* NSObject+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C654EEE82FD69384006FCCBC /* NSObject+Utils.m */; };
 		C660B4D52E7C03EC0072054E /* libxlsxwriter in Frameworks */ = {isa = PBXBuildFile; productRef = C660B4D42E7C03EC0072054E /* libxlsxwriter */; };
-		DA227A4D744F77CF4AAF703F /* Pods_ElitechToolDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF71F0D139DA9CFB25A55523 /* Pods_ElitechToolDemo.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C654EF2F2FD6938D006FCCBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C654EEED2FD69384006FCCBC /* ElitechToolSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C6C2DAA42EBD9CC100C7FE1A;
+			remoteInfo = ElitechToolSDK;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		B100B1D80558B8FD53089439 /* Pods-ElitechToolDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ElitechToolDemo.release.xcconfig"; path = "Target Support Files/Pods-ElitechToolDemo/Pods-ElitechToolDemo.release.xcconfig"; sourceTree = "<group>"; };
-		BB29C2D132A85AFCD3DDEBB8 /* Pods-ElitechToolDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ElitechToolDemo.debug.xcconfig"; path = "Target Support Files/Pods-ElitechToolDemo/Pods-ElitechToolDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		C62716CA2E700DDC009E3B75 /* ElitechToolDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElitechToolDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF71F0D139DA9CFB25A55523 /* Pods_ElitechToolDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ElitechToolDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C654EED32FD69384006FCCBC /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		C654EED52FD69384006FCCBC /* DeviceTypeDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceTypeDefine.h; sourceTree = "<group>"; };
+		C654EED62FD69384006FCCBC /* ElitechManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElitechManager.h; sourceTree = "<group>"; };
+		C654EED72FD69384006FCCBC /* ElitechManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElitechManager.m; sourceTree = "<group>"; };
+		C654EED82FD69384006FCCBC /* ElitechToolDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElitechToolDevice.h; sourceTree = "<group>"; };
+		C654EED92FD69384006FCCBC /* ElitechToolDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ElitechToolDevice.m; sourceTree = "<group>"; };
+		C654EEDA2FD69384006FCCBC /* ElitechToolSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ElitechToolSDK.h; sourceTree = "<group>"; };
+		C654EEDB2FD69384006FCCBC /* ETBleScanData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETBleScanData.h; sourceTree = "<group>"; };
+		C654EEDC2FD69384006FCCBC /* ETBleScanData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETBleScanData.m; sourceTree = "<group>"; };
+		C654EEDD2FD69384006FCCBC /* ETNewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETNewProtocol.h; sourceTree = "<group>"; };
+		C654EEDE2FD69384006FCCBC /* ETNewProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETNewProtocol.m; sourceTree = "<group>"; };
+		C654EEDF2FD69384006FCCBC /* ETNewProtocolWorker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETNewProtocolWorker.h; sourceTree = "<group>"; };
+		C654EEE02FD69384006FCCBC /* ETNewProtocolWorker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETNewProtocolWorker.m; sourceTree = "<group>"; };
+		C654EEE12FD69384006FCCBC /* ETTimerTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETTimerTool.h; sourceTree = "<group>"; };
+		C654EEE22FD69384006FCCBC /* ETTimerTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETTimerTool.m; sourceTree = "<group>"; };
+		C654EEE32FD69384006FCCBC /* ETVgwRtObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETVgwRtObj.h; sourceTree = "<group>"; };
+		C654EEE42FD69384006FCCBC /* ETVgwRtObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETVgwRtObj.m; sourceTree = "<group>"; };
+		C654EEE52FD69384006FCCBC /* NSData+Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+Util.h"; sourceTree = "<group>"; };
+		C654EEE62FD69384006FCCBC /* NSData+Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+Util.m"; sourceTree = "<group>"; };
+		C654EEE72FD69384006FCCBC /* NSObject+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Utils.h"; sourceTree = "<group>"; };
+		C654EEE82FD69384006FCCBC /* NSObject+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Utils.m"; sourceTree = "<group>"; };
+		C654EEE92FD69384006FCCBC /* UnitsDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitsDefine.h; sourceTree = "<group>"; };
+		C654EEEA2FD69384006FCCBC /* UnitTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitTool.h; sourceTree = "<group>"; };
+		C654EEEB2FD69384006FCCBC /* UnitTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitTool.m; sourceTree = "<group>"; };
+		C654EEED2FD69384006FCCBC /* ElitechToolSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ElitechToolSDK.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -47,29 +89,19 @@
 			files = (
 				C660B4D52E7C03EC0072054E /* libxlsxwriter in Frameworks */,
 				C62716FB2E7177C7009E3B75 /* AlertToast in Frameworks */,
-				DA227A4D744F77CF4AAF703F /* Pods_ElitechToolDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		154935FC2877D4736EB19061 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				BB29C2D132A85AFCD3DDEBB8 /* Pods-ElitechToolDemo.debug.xcconfig */,
-				B100B1D80558B8FD53089439 /* Pods-ElitechToolDemo.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		C62716C12E700DDC009E3B75 = {
 			isa = PBXGroup;
 			children = (
+				C654EEEE2FD69384006FCCBC /* ElitechToolSDK */,
 				C62716CC2E700DDC009E3B75 /* ElitechToolDemo */,
+				C654EE1D2FD692B8006FCCBC /* Frameworks */,
 				C62716CB2E700DDC009E3B75 /* Products */,
-				154935FC2877D4736EB19061 /* Pods */,
-				F9EE1F3311D0EAA85D59CA8C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,12 +113,67 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F9EE1F3311D0EAA85D59CA8C /* Frameworks */ = {
+		C654EE1D2FD692B8006FCCBC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EF71F0D139DA9CFB25A55523 /* Pods_ElitechToolDemo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C654EED42FD69384006FCCBC /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				C654EED32FD69384006FCCBC /* PrivacyInfo.xcprivacy */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		C654EEEC2FD69384006FCCBC /* ElitechToolSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C654EED52FD69384006FCCBC /* DeviceTypeDefine.h */,
+				C654EED62FD69384006FCCBC /* ElitechManager.h */,
+				C654EED72FD69384006FCCBC /* ElitechManager.m */,
+				C654EED82FD69384006FCCBC /* ElitechToolDevice.h */,
+				C654EED92FD69384006FCCBC /* ElitechToolDevice.m */,
+				C654EEDA2FD69384006FCCBC /* ElitechToolSDK.h */,
+				C654EEDB2FD69384006FCCBC /* ETBleScanData.h */,
+				C654EEDC2FD69384006FCCBC /* ETBleScanData.m */,
+				C654EEDD2FD69384006FCCBC /* ETNewProtocol.h */,
+				C654EEDE2FD69384006FCCBC /* ETNewProtocol.m */,
+				C654EEDF2FD69384006FCCBC /* ETNewProtocolWorker.h */,
+				C654EEE02FD69384006FCCBC /* ETNewProtocolWorker.m */,
+				C654EEE12FD69384006FCCBC /* ETTimerTool.h */,
+				C654EEE22FD69384006FCCBC /* ETTimerTool.m */,
+				C654EEE32FD69384006FCCBC /* ETVgwRtObj.h */,
+				C654EEE42FD69384006FCCBC /* ETVgwRtObj.m */,
+				C654EEE52FD69384006FCCBC /* NSData+Util.h */,
+				C654EEE62FD69384006FCCBC /* NSData+Util.m */,
+				C654EEE72FD69384006FCCBC /* NSObject+Utils.h */,
+				C654EEE82FD69384006FCCBC /* NSObject+Utils.m */,
+				C654EEE92FD69384006FCCBC /* UnitsDefine.h */,
+				C654EEEA2FD69384006FCCBC /* UnitTool.h */,
+				C654EEEB2FD69384006FCCBC /* UnitTool.m */,
+			);
+			path = ElitechToolSDK;
+			sourceTree = "<group>";
+		};
+		C654EEEE2FD69384006FCCBC /* ElitechToolSDK */ = {
+			isa = PBXGroup;
+			children = (
+				C654EED42FD69384006FCCBC /* Assets */,
+				C654EEEC2FD69384006FCCBC /* ElitechToolSDK */,
+				C654EEED2FD69384006FCCBC /* ElitechToolSDK.xcodeproj */,
+			);
+			name = ElitechToolSDK;
+			path = /Users/wuwu/Desktop/JC_Folder/toolSDK/ElitechToolSDK;
+			sourceTree = "<absolute>";
+		};
+		C654EEEF2FD69384006FCCBC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,15 +183,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C62716D82E700DDE009E3B75 /* Build configuration list for PBXNativeTarget "ElitechToolDemo" */;
 			buildPhases = (
-				A9BFFDDA5C33E52474FCCC60 /* [CP] Check Pods Manifest.lock */,
 				C62716C62E700DDC009E3B75 /* Sources */,
 				C62716C72E700DDC009E3B75 /* Frameworks */,
 				C62716C82E700DDC009E3B75 /* Resources */,
-				FF9C441D3DE3D694714101DB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C654EF302FD6938D006FCCBC /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				C62716CC2E700DDC009E3B75 /* ElitechToolDemo */,
@@ -149,6 +235,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C62716CB2E700DDC009E3B75 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C654EEEF2FD69384006FCCBC /* Products */;
+					ProjectRef = C654EEED2FD69384006FCCBC /* ElitechToolSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C62716C92E700DDC009E3B75 /* ElitechToolDemo */,
@@ -161,62 +253,39 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C654EEF12FD69384006FCCBC /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A9BFFDDA5C33E52474FCCC60 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ElitechToolDemo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FF9C441D3DE3D694714101DB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ElitechToolDemo/Pods-ElitechToolDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ElitechToolDemo/Pods-ElitechToolDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ElitechToolDemo/Pods-ElitechToolDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C62716C62E700DDC009E3B75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C654EEF22FD69384006FCCBC /* ETNewProtocolWorker.m in Sources */,
+				C654EEF32FD69384006FCCBC /* ETVgwRtObj.m in Sources */,
+				C654EEF42FD69384006FCCBC /* ETBleScanData.m in Sources */,
+				C654EEF52FD69384006FCCBC /* ETTimerTool.m in Sources */,
+				C654EEF62FD69384006FCCBC /* UnitTool.m in Sources */,
+				C654EEF72FD69384006FCCBC /* NSData+Util.m in Sources */,
+				C654EEF82FD69384006FCCBC /* ElitechToolDevice.m in Sources */,
+				C654EEF92FD69384006FCCBC /* ElitechManager.m in Sources */,
+				C654EEFA2FD69384006FCCBC /* ETNewProtocol.m in Sources */,
+				C654EEFB2FD69384006FCCBC /* NSObject+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C654EF302FD6938D006FCCBC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ElitechToolSDK;
+			targetProxy = C654EF2F2FD6938D006FCCBC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C62716D62E700DDE009E3B75 /* Debug */ = {
@@ -340,7 +409,6 @@
 		};
 		C62716D92E700DDE009E3B75 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB29C2D132A85AFCD3DDEBB8 /* Pods-ElitechToolDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -381,7 +449,6 @@
 		};
 		C62716DA2E700DDE009E3B75 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B100B1D80558B8FD53089439 /* Pods-ElitechToolDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
