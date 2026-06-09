@@ -769,7 +769,7 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
     [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
         NSData *data = [device.worker setDataWithSubFunc:REG_COMM_PWR_OFF andContent:1];
         [device write:device.peripheral value:data];
-        // 关机指令无响应，超时自动释放队列
+        completed();
     }];
 }
 
