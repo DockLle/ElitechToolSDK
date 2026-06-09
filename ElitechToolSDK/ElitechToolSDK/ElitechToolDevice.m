@@ -575,7 +575,13 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
                 _realTimeObj = [[ETVgwRtObj alloc] init];
             }
             if (vaccum >= VAC_ARG_NONE) {
-                _realTimeObj.vaccum = @"FF";
+                if (vaccum == VAC_ARG_ADCE) {
+                    _realTimeObj.vaccum = @"E01";
+                }
+                else
+                {
+                    _realTimeObj.vaccum = @"FF";
+                }
             }
             else
             {
