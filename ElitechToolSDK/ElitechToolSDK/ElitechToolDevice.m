@@ -27,7 +27,7 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 @property (nonatomic,strong) NSMutableData *allRecord;
 @property (nonatomic) NSUInteger refreshInterval;
 @property (nonatomic) ETTimerTool *timerTool;
-@property (nonatomic,strong) ETVgwRtObj *realTimeObj;
+//@property (nonatomic,strong) ETVgwRtObj *realTimeObj;
 
 @property (nonatomic,strong) void(^clockCallBack)(BOOL);
 //@property (nonatomic,strong) void(^rtIntervalCallBack)(BOOL);
@@ -571,16 +571,16 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
             NSString *vunitStr = UPa;//美的要求固定输入pa
             NSString *tunitStr = [ETNewProtocolWorker tUnitFrom:tUnit];
             
-            if (!_realTimeObj) {
-                _realTimeObj = [[ETVgwRtObj alloc] init];
-            }
+//            if (!_realTimeObj) {
+            ETVgwRtObj *rtObj = [[ETVgwRtObj alloc] init];
+//            }
             if (vaccum >= VAC_ARG_NONE) {
                 if (vaccum == VAC_ARG_ADCE) {
-                    _realTimeObj.vaccum = @"E01";
+                    rtObj.vaccum = @"E01";
                 }
                 else
                 {
-                    _realTimeObj.vaccum = @"FF";
+                    rtObj.vaccum = @"FF";
                 }
             }
             else
@@ -592,7 +592,7 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
                 
                 NSString *format = [NSString stringWithFormat:@"%%.%luf",(unsigned long)decimals];
                 
-                _realTimeObj.vaccum = [NSString stringWithFormat:format,vv];
+                rtObj.vaccum = [NSString stringWithFormat:format,vv];
             }
             
             if (t_pcb < TEMP_ARG_NONE && t_h20 < TEMP_ARG_NONE) {
@@ -600,60 +600,63 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
                 float s_h2o = t_h20 * 0.1;
                 s_pcb = [UnitTool temperatureChangeWithOldValue:s_pcb oldUnit:nil aimUnit:tunitStr];
                 s_h2o = [UnitTool temperatureChangeWithOldValue:s_h2o oldUnit:nil aimUnit:tunitStr];
-                _realTimeObj.tamb = [NSString stringWithFormat:@"%.1f",s_pcb];
-                _realTimeObj.th2o = [NSString stringWithFormat:@"%.1f",s_h2o];
-                _realTimeObj.dtT = [NSString stringWithFormat:@"%.1f",s_pcb - s_h2o];
+                rtObj.tamb = [NSString stringWithFormat:@"%.1f",s_pcb];
+                rtObj.th2o = [NSString stringWithFormat:@"%.1f",s_h2o];
+                rtObj.dtT = [NSString stringWithFormat:@"%.1f",s_pcb - s_h2o];
             }
             else if (t_pcb < TEMP_ARG_NONE)
             {
                 float s_pcb = t_pcb * 0.1;
                 s_pcb = [UnitTool temperatureChangeWithOldValue:s_pcb oldUnit:nil aimUnit:tunitStr];
-                _realTimeObj.tamb = [NSString stringWithFormat:@"%.1f",s_pcb];
-                _realTimeObj.th2o = @"FF";
-                _realTimeObj.dtT = @"FF";
+                rtObj.tamb = [NSString stringWithFormat:@"%.1f",s_pcb];
+                rtObj.th2o = @"FF";
+                rtObj.dtT = @"FF";
             }
             else if (t_h20 < TEMP_ARG_NONE)
             {
                 float s_h2o = t_h20 * 0.1;
                 s_h2o = [UnitTool temperatureChangeWithOldValue:s_h2o oldUnit:nil aimUnit:tunitStr];
-                _realTimeObj.tamb = @"FF";
-                _realTimeObj.th2o = [NSString stringWithFormat:@"%.1f",s_h2o];
-                _realTimeObj.dtT = @"FF";
+                rtObj.tamb = @"FF";
+                rtObj.th2o = [NSString stringWithFormat:@"%.1f",s_h2o];
+                rtObj.dtT = @"FF";
             }
             else
             {
-                _realTimeObj.tamb = @"FF";
-                _realTimeObj.th2o = @"FF";
-                _realTimeObj.dtT = @"FF";
+                rtObj.tamb = @"FF";
+                rtObj.th2o = @"FF";
+                rtObj.dtT = @"FF";
             }
             
             
-            _realTimeObj.vacUnit = vunitStr;
-            _realTimeObj.temUnit = tunitStr;
-            _realTimeObj.recordStatus = recordStatus;
-            _realTimeObj.recordInterval = recordInterval;
-            _realTimeObj.displayMode = displayMode;
-            _realTimeObj.power = powerLevel;
+            rtObj.vacUnit = vunitStr;
+            rtObj.temUnit = tunitStr;
+            rtObj.recordStatus = recordStatus;
+            rtObj.recordInterval = recordInterval;
+            rtObj.displayMode = displayMode;
+            rtObj.power = powerLevel;
             
+            if (self.rtDataCallBack) {
+                self.rtDataCallBack(rtObj);
+            }
             
         }
     }
 }
 
-- (void)receiveRtDataWithInterval:(NSUInteger)interval rtData:(void(^)(ETVgwRtObj *))rtData
+- (void)receiveRtDataWithRtData:(void(^)(ETVgwRtObj *))rtData
 {
-    self.refreshInterval = interval;
+//    self.refreshInterval = interval;
     self.rtDataCallBack = rtData;
     
-    if (!_timerTool) {
-        _timerTool = [[ETTimerTool alloc] initWithRefreshInterval:interval];
-        __weak typeof (self) weakSelf = self;
-        [_timerTool startCountDown:^{
-            if (weakSelf.rtDataCallBack) {
-                weakSelf.rtDataCallBack(weakSelf.realTimeObj);
-            }
-        }];
-    }
+//    if (!_timerTool) {
+//        _timerTool = [[ETTimerTool alloc] initWithRefreshInterval:interval];
+//        __weak typeof (self) weakSelf = self;
+//        [_timerTool startCountDown:^{
+//            if (weakSelf.rtDataCallBack) {
+//                weakSelf.rtDataCallBack(weakSelf.realTimeObj);
+//            }
+//        }];
+//    }
 }
 
 - (void)getDeviceVersion:(void(^)(NSString *swv,NSString *remoteCode))result

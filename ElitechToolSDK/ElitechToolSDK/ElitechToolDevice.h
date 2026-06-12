@@ -73,9 +73,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 接收实时数据
 /// - Parameters:
-///   - interval: 实时数据更新间隔时间,单位秒
 ///   - rtData: 实时数据回调
-- (void)receiveRtDataWithInterval:(NSUInteger)interval rtData:(void(^)(ETVgwRtObj *))rtData;
+- (void)receiveRtDataWithRtData:(void(^)(ETVgwRtObj *))rtData;
 
 
 /// 获取设备版本
