@@ -30,7 +30,7 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
 //@property (nonatomic,strong) ETVgwRtObj *realTimeObj;
 
 @property (nonatomic,strong) void(^clockCallBack)(BOOL);
-//@property (nonatomic,strong) void(^rtIntervalCallBack)(BOOL);
+@property (nonatomic,strong) void(^rtIntervalCallBack)(BOOL);
 @property (nonatomic,strong) void(^clearCallBack)(BOOL);
 @property (nonatomic,strong) void(^recordEnableCallBack)(BOOL);
 @property (nonatomic,strong) void(^recordIntervalCallBack)(BOOL);
@@ -230,17 +230,22 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
     }];
 }
 
-//- (void)setRTInterval:(NSUInteger)interval result:(void(^)(BOOL res))result
-//{
-//    //设置实时数据间隔，会收到响应后自动发来实时数据
-//    NSData *data = [self.worker realTimeDataWithInterval:interval];
-//    self.rtIntervalCallBack = result;
-//    BOOL res = [self write:self.peripheral value:data];
-//    if (!res)
-//    {
-//        result(NO);
-//    }
-//}
+- (void)setRTInterval:(NSUInteger)interval result:(void(^)(BOOL res))result
+{
+    
+    [self performCommand:^(ElitechToolDevice *device, void (^completed)(void)) {
+        NSData *data = [device.worker realTimeDataWithInterval:interval * 10];
+        device.rtIntervalCallBack = ^(BOOL res) {
+            if (result) result(res);
+            completed();
+        };
+        BOOL ok = [device write:device.peripheral value:data];
+        if (!ok) {
+            if (result) result(NO);
+            completed();
+        }
+    }];
+}
 
 - (void)clearRecordWithResult:(void(^)(BOOL res))result
 {
@@ -508,10 +513,10 @@ static NSString *const hostPort = @"https://www.i-elitech.net";
         else if (model.funcCode == ETFuncCodeType01)
         {
             if (model.subFuncCode == REG_COMM_AUTO_REP) {
-//                if (self.rtIntervalCallBack)
-//                {
-//                    self.rtIntervalCallBack(YES);
-//                }
+                if (self.rtIntervalCallBack)
+                {
+                    self.rtIntervalCallBack(YES);
+                }
             }
             else if (model.subFuncCode == REG_COMM_REC_EN)
             {

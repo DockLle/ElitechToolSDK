@@ -50,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - interval: 时间间隔
 - (void)setRecordInterval:(NSInteger)interval result:(void(^)(BOOL res))result;
 
+/// 实时数据间隔配置（单位秒）
+- (void)setRTInterval:(NSUInteger)interval result:(void(^)(BOOL res))result;
+
 /// 设置真空单位
 /// micron：0  mTorr：1  inHg：2  Pa：3  Torr：4  kPa：5  mbar：6  psia：7
 - (void)setVacuumUnit:(NSInteger)unit result:(void(^)(BOOL res))result;
