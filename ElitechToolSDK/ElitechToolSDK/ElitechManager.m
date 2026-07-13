@@ -12,7 +12,7 @@
 //#import "DeviceTypeDefine.h"
 
 
-NSString * const ETDeviceCodeVgwmini = @"0003";
+NSString * const ETDeviceCodeVgwmini = @"000f";
 NSString * const ETDeviceTypeNameVgwmini = @"VGW-mini";
 
 
